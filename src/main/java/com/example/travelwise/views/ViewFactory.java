@@ -69,26 +69,13 @@ public class ViewFactory {
         }
         return profileView;
     }
-
-    /*public AnchorPane getSignupView() {
-        if (signupView == null) {
-            try{
-                signupView = new FXMLLoader(getClass().getResource("/Fxml/Signup.fxml")).load();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-        return signupView;
-    }*/
-
+    
     public void showLoginView() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
         createStage(loader);
     }
     public void showSignupView() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Signup.fxml"));
-        /*SignupController signupController = new SignupController();
-        loader.setController(signupController);*/
         createStage(loader);
     }
 

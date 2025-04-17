@@ -1,6 +1,7 @@
 package com.example.travelwise.views;
 
 import com.example.travelwise.controllers.Client.ClientController;
+import com.example.travelwise.controllers.SignupController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,9 @@ public class ViewFactory {
     private final StringProperty clientSelectedMenuItem;
     private AnchorPane dashboardView;
     private AnchorPane flightView;
+    private AnchorPane profileView;
+    private AnchorPane hotelsView;
+    private AnchorPane signupView;
 
     public ViewFactory() {
         this.clientSelectedMenuItem = new SimpleStringProperty("");
@@ -44,9 +48,47 @@ public class ViewFactory {
         return flightView;
     }
 
+    public AnchorPane getHotelsView() {
+        if (hotelsView == null) {
+            try {
+                hotelsView = new FXMLLoader(getClass().getResource("/Fxml/Client/Hotels.fxml")).load();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return hotelsView;
+    }
+
+    public AnchorPane getProfileView() {
+        if (profileView == null) {
+            try {
+                profileView = new FXMLLoader(getClass().getResource("/Fxml/Client/Profile.fxml")).load();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return profileView;
+    }
+
+    /*public AnchorPane getSignupView() {
+        if (signupView == null) {
+            try{
+                signupView = new FXMLLoader(getClass().getResource("/Fxml/Signup.fxml")).load();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return signupView;
+    }*/
+
     public void showLoginView() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
-
+        createStage(loader);
+    }
+    public void showSignupView() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Signup.fxml"));
+        /*SignupController signupController = new SignupController();
+        loader.setController(signupController);*/
         createStage(loader);
     }
 

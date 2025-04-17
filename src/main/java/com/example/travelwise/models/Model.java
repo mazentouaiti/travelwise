@@ -7,6 +7,7 @@ public class Model {
     private final ViewFactory viewFactory;
 
 
+
     private Model(){
         this.viewFactory = new ViewFactory();
     }
@@ -19,4 +20,5 @@ public class Model {
     public ViewFactory getViewFactory() {
         return viewFactory;
     }
+
 }

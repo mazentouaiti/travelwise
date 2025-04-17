@@ -91,7 +91,7 @@
     -fx-background-color: #ddd;
 }
 .progress-bar .bar {
-    -fx-background-color: #ffc107;
+    -fx-background-color: #588b8b;
     -fx-background-radius: 15;
     -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 5, 0.2, 0, 2);
 }

@@ -34,7 +34,7 @@
       <Label fx:id="budget" styleClass="budget" text="\$1,200" />
       <HBox prefHeight="30.0" prefWidth="200.0" styleClass="progression">
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Total Expreses" />
-         <ProgressBar fx:id="progression" prefWidth="120.0" progress="0.0" />
+         <ProgressBar fx:id="progression" prefWidth="120.0" progress="0.72" />
       </HBox>
    </VBox>
    <VBox layoutY="369.0" prefHeight="341.0" prefWidth="266.0" styleClass="notification_view" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="369.0">

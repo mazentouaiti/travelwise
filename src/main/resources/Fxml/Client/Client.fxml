@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
+
 <?import javafx.scene.layout.*?>
 
 <BorderPane fx:id="client_parent" xmlns="http://javafx.com/javafx"
@@ -11,7 +8,7 @@
     <left>
         <fx:include source="ClientMenu.fxml"/>
     </left>
-    <center>
-        <fx:include source="Dashboard.fxml"/>
+    <center >
+        <fx:include fx:id="center_area" source="Dashboard.fxml"/>
     </center>
 </BorderPane>

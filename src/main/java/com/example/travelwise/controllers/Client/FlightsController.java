@@ -2,7 +2,6 @@ package com.example.travelwise.controllers.Client;
 
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 

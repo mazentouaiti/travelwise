@@ -15,7 +15,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="login_container" stylesheets="@../Styles/login.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.LoginController">
    <VBox layoutX="-1.0" prefHeight="400.0" prefWidth="200.0" styleClass="login_logo_container" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
       <FontAwesomeIconView glyphName="PLANE" size="30" />
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TravelWise" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="AirPlan" />
    </VBox>
    <VBox layoutX="221.0" layoutY="25.0" prefHeight="350.0" prefWidth="350.0" styleClass="login_form_container">
       <Label text="Account Type :" />
@@ -23,8 +23,8 @@
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Admin" />
-               <String fx:value="Client" />
-               <String fx:value="Agence" />
+               <String fx:value="Passenger" />
+               <String fx:value="Agency" />
                <String fx:value="Company" />
             </FXCollections>
          </items>

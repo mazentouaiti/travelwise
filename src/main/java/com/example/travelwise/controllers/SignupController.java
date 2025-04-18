@@ -1,5 +1,6 @@
 package com.example.travelwise.controllers;
 
+import com.example.travelwise.models.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -30,11 +31,17 @@ public class SignupController implements Initializable {
     public Button btnChooseFile;
     public PasswordField passField;
     public CheckBox agree_check;
+    public Hyperlink linktologin;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        linktologin.setOnAction(event -> {onlinkClicked();});
 
-
+    }
+    private void onlinkClicked() {
+        Stage stage = (Stage) linktologin.getScene().getWindow();
+        Model.getInstance().getViewFactory().closeStage(stage);
+        Model.getInstance().getViewFactory().showLoginView();
     }
    /* @FXML
     private void handleBackToLogin (ActionEvent event) {

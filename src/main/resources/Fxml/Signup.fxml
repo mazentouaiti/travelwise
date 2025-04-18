@@ -30,14 +30,15 @@
    <ComboBox fx:id="roleComboBox" layoutX="108.0" layoutY="345.0" prefHeight="26.0" prefWidth="175.0" promptText="Select Role">
       <items>
          <FXCollections fx:factory="observableArrayList">
-            <String fx:value="User" />
+            <String fx:value="Passenger" />
             <String fx:value="Admin" />
-            <String fx:value="Agence" />
+            <String fx:value="Agency" />
+            <String fx:value="Company" />
          </FXCollections>
       </items>
    </ComboBox>
    <Button fx:id="signUpButton" layoutX="302.0" layoutY="459.0" prefHeight="26.0" prefWidth="102.0" styleClass="resserv_btn" text="Sign Up" />
-   <Hyperlink layoutX="265.0" layoutY="581.0" text="Already have an account? Login" />
+   <Hyperlink fx:id="linktologin" layoutX="265.0" layoutY="581.0" text="Already have an account? Login" />
    <Text layoutX="293.0" layoutY="520.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Or Sign Up With ">
       <font>
          <Font size="16.0" />

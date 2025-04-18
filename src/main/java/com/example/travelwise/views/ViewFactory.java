@@ -69,7 +69,7 @@ public class ViewFactory {
         }
         return profileView;
     }
-    
+
     public void showLoginView() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
         createStage(loader);

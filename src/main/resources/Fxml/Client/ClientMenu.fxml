@@ -20,6 +20,11 @@
                <FontAwesomeIconView glyphName="HOME" size="20" />
             </graphic>
          </Button>
+         <Button fx:id="discover_user" layoutX="30.0" layoutY="20.0" mnemonicParsing="false" text="Discover">
+            <graphic>
+               <FontAwesomeIconView glyphName="COMPASS" size="20" />
+            </graphic>
+         </Button>
          <Button fx:id="flights_btn" mnemonicParsing="false" text="Flights">
             <graphic>
                <FontAwesomeIconView glyphName="PLANE" size="20" />
@@ -39,6 +44,11 @@
          <Button fx:id="profile_btn" mnemonicParsing="false" styleClass="alt_menu_btn" text="Profile">
             <graphic>
                <FontAwesomeIconView glyphName="USER" size="20" />
+            </graphic>
+         </Button>
+         <Button fx:id="assistance_user" layoutX="30.0" layoutY="282.0" mnemonicParsing="false" styleClass="alt_menu_btn" text="Assistance">
+            <graphic>
+               <FontAwesomeIconView glyphName="COMMENTS" size="20" />
             </graphic>
          </Button>
          <Button fx:id="logout_btn" mnemonicParsing="false" styleClass="alt_menu_btn" text="Logout">

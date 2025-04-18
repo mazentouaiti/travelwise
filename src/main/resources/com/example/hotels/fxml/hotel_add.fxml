@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="750.0" prefWidth="850.0" stylesheets="@../style/hotel_add.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotels.controllers.HotelAdd">
+   <children>
+      <Label layoutX="31.0" layoutY="123.0" text="Name :" />
+      <Label layoutX="21.0" layoutY="285.0" text="Full Address :" />
+      <Label styleClass="title_pane" text="Add Accomodation">
+         <font>
+            <Font size="22.0" />
+         </font></Label>
+      <Label layoutX="27.0" layoutY="341.0" text="Type :" />
+      <Label layoutX="29.0" layoutY="406.0" text="Amenities :" />
+      <Label layoutX="533.0" layoutY="229.0" text="Rating :" />
+      <Label layoutX="29.0" layoutY="176.0" text="Country :" />
+      <Label layoutX="36.0" layoutY="230.0" text="City :" />
+      <Label layoutX="28.0" layoutY="511.0" text="Description :" />
+      <Label layoutX="511.0" layoutY="284.0" text="Principal photo :" />
+      <Label layoutX="511.0" layoutY="341.0" text="Detailed Album :" />
+      <Label layoutX="514.0" layoutY="176.0" text="Price Per Night :" />
+      <Label layoutX="515.0" layoutY="120.0" text="Guest Capacity :" />
+      <ComboBox fx:id="typeCombo" layoutX="118.0" layoutY="336.0" prefWidth="150.0" promptText="Select a type" />
+      <TextField fx:id="namefield" layoutX="119.0" layoutY="120.0" />
+      <TextField fx:id="countryfield" layoutX="119.0" layoutY="172.0" />
+      <TextArea fx:id="descriptionfield" layoutX="28.0" layoutY="542.0" prefHeight="178.0" prefWidth="560.0" />
+      <TextField fx:id="cityfield" layoutX="120.0" layoutY="225.0" />
+      <TextField fx:id="addressfield" layoutX="119.0" layoutY="280.0" prefHeight="26.0" prefWidth="150.0" />
+      <HBox fx:id="starBox" layoutX="634.0" layoutY="221.0" prefHeight="33.0" prefWidth="200.0" />
+      <Button fx:id="choosephoto" layoutX="643.0" layoutY="281.0" mnemonicParsing="false" onAction="#handleChooseFile" prefHeight="26.0" prefWidth="132.0" text="Choose File" />
+      <Button fx:id="choosealbum" layoutX="643.0" layoutY="337.0" mnemonicParsing="false" onAction="#handleChooseFile" prefHeight="26.0" prefWidth="132.0" text="Choose File" />
+      <ImageView fitHeight="60.0" fitWidth="67.0" layoutX="-4.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/accicon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="194.0" fitWidth="180.0" layoutX="644.0" layoutY="501.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/acc.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnAdd" layoutX="706.0" layoutY="707.0" mnemonicParsing="false" onAction="#handleSubmit" text="Submit" />
+      <AnchorPane id="anchop" fx:id="anchoption" layoutX="38.0" layoutY="435.0" prefHeight="60.0" prefWidth="663.0">
+         <children>
+            <CheckBox fx:id="wifi" layoutX="25.0" layoutY="20.0" mnemonicParsing="false" text="Wi-Fi" />
+            <CheckBox fx:id="pool" layoutX="121.0" layoutY="21.0" mnemonicParsing="false" text="Pool" />
+            <CheckBox fx:id="air" layoutX="211.0" layoutY="21.0" mnemonicParsing="false" text="Air Conditioning" />
+            <CheckBox fx:id="parking" layoutX="389.0" layoutY="21.0" mnemonicParsing="false" text="Parking" />
+            <CheckBox fx:id="meals" layoutX="507.0" layoutY="22.0" mnemonicParsing="false" text="All Meals Included" />
+         </children>
+      </AnchorPane>
+      <Button fx:id="btnreturn" layoutX="775.0" layoutY="707.0" mnemonicParsing="false" onAction="#switch_admin" text="return" />
+      <Spinner fx:id="capacityspinner" editable="true" layoutX="640.0" layoutY="119.0" prefHeight="26.0" prefWidth="132.0" />
+      <TextField fx:id="pricefield" layoutX="643.0" layoutY="172.0" prefHeight="26.0" prefWidth="132.0" />
+   </children>
+</AnchorPane>

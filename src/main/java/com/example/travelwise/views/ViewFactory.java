@@ -96,6 +96,7 @@ public class ViewFactory {
         Stage stage = new Stage();
         stage.setScene(scene);
         stage.setTitle("TravelWise");
+        stage.setResizable(false);
         stage.show();
     }
     public void closeStage(Stage stage){

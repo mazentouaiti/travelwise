@@ -8,16 +8,16 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable {
-    public BorderPane client_parent;
+    public BorderPane admin_parent;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         Model.getInstance().getViewFactory().getClientSelectedMenuItem().addListener((observable, oldValue, newValue) -> {
             switch (newValue) {
-                case "Flights" -> client_parent.setCenter(Model.getInstance().getViewFactory().getFlightView());
-                case "Profile" -> client_parent.setCenter(Model.getInstance().getViewFactory().getProfileView());
-                case "Hotels" -> client_parent.setCenter(Model.getInstance().getViewFactory().getHotelsView());
-                default -> client_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
+                case "Flights" -> admin_parent.setCenter(Model.getInstance().getViewFactory().getFlightView());
+                case "Profile" -> admin_parent.setCenter(Model.getInstance().getViewFactory().getProfileView());
+                case "Hotels" -> admin_parent.setCenter(Model.getInstance().getViewFactory().getHotelsAdminView());
+                default -> admin_parent.setCenter(Model.getInstance().getViewFactory().getDashboardView());
             }
         });
     }

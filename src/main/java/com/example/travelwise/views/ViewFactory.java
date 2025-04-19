@@ -12,6 +12,8 @@ import javafx.stage.Stage;
 public class ViewFactory {
     // client views
     private final StringProperty clientSelectedMenuItem;
+    private final StringProperty adminSelectedMenuItem;
+
     private AnchorPane dashboardView;
     private AnchorPane flightView;
     private AnchorPane profileView;
@@ -20,11 +22,20 @@ public class ViewFactory {
 
     public ViewFactory() {
         this.clientSelectedMenuItem = new SimpleStringProperty("");
+        this.adminSelectedMenuItem = new SimpleStringProperty("");
+
     }
 
     public StringProperty getClientSelectedMenuItem() {
         return clientSelectedMenuItem;
     }
+
+
+    public StringProperty getAdminSelectedMenuItem() {
+        return adminSelectedMenuItem;
+    }
+
+
 
     public AnchorPane getDashboardView() {
         if (dashboardView == null) {
@@ -70,6 +81,7 @@ public class ViewFactory {
         return profileView;
     }
 
+
     public void showLoginView() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
         createStage(loader);
@@ -84,6 +96,23 @@ public class ViewFactory {
         ClientController clientController = new ClientController();
         loader.setController(clientController);
         createStage(loader);
+    }
+    public void showAdminView(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/Admin.fxml"));
+        ClientController clientController = new ClientController();
+        loader.setController(clientController);
+        createStage(loader);
+    }
+
+    public AnchorPane getHotelsAdminView() {
+        if (profileView == null) {
+            try {
+                profileView = new FXMLLoader(getClass().getResource("/Fxml/Admin/hotel_admin.fxml")).load();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return profileView;
     }
 
     private void createStage(FXMLLoader loader) {

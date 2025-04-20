@@ -1,28 +1,44 @@
 package com.example.travelwise.views;
 
+import com.example.travelwise.controllers.Admin.AdminController;
 import com.example.travelwise.controllers.Client.ClientController;
 import com.example.travelwise.controllers.SignupController;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ViewFactory {
+    private AccountType loginAccountType;
     // client views
-    private final StringProperty clientSelectedMenuItem;
+    private final ObjectProperty<ClientMenuOptions> clientSelectedMenuItem;
     private AnchorPane dashboardView;
     private AnchorPane flightView;
     private AnchorPane profileView;
     private AnchorPane hotelsView;
     private AnchorPane signupView;
 
+    //AdminViews
+    private final ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
+    private AnchorPane FlightAdminView;
+
     public ViewFactory() {
-        this.clientSelectedMenuItem = new SimpleStringProperty("");
+        this.loginAccountType = AccountType.PASSENGER;
+        this.adminSelectedMenuItem = new SimpleObjectProperty<>();
+        this.clientSelectedMenuItem = new SimpleObjectProperty<>();
     }
 
-    public StringProperty getClientSelectedMenuItem() {
+    public AccountType getLoginAccountType() {
+        return loginAccountType;
+    }
+
+    public void setLoginAccountType(AccountType loginAccountType) {
+        this.loginAccountType = loginAccountType;
+    }
+
+    public ObjectProperty<ClientMenuOptions> getClientSelectedMenuItem() {
         return clientSelectedMenuItem;
     }
 
@@ -84,6 +100,26 @@ public class ViewFactory {
         ClientController clientController = new ClientController();
         loader.setController(clientController);
         createStage(loader);
+    }
+
+    public void showAdminWindow(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/Admin.fxml"));
+        AdminController adminController = new AdminController();
+        loader.setController(adminController);
+        createStage(loader);
+    }
+    public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem() {
+        return adminSelectedMenuItem;
+    }
+    public AnchorPane getFlightAdminView(){
+        if (FlightAdminView == null) {
+            try {
+                FlightAdminView = new FXMLLoader(getClass().getResource("/Fxml/Admin/FlightAdmin.fxml")).load();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return FlightAdminView;
     }
 
     private void createStage(FXMLLoader loader) {

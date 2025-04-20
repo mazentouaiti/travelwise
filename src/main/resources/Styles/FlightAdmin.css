@@ -1,0 +1,107 @@
+.flight_view{
+    -fx-background-color: #EEEEEE;
+}
+.Vbox{
+    -fx-spacing: 20;
+}
+.title{
+    -fx-font-family: "Calibri Light";
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-background-color: #588b8b;
+    -fx-background-radius: 0 0 25 0;
+    -fx-pref-width: 200;
+    -fx-pref-height: 40;
+    -fx-padding: 20;
+    -fx-alignment: center;
+}
+.title FontAwesomeIconView{
+    -fx-fill: white;
+}
+.field_view{
+    -fx-background-color: white;
+    -fx-padding: 10;
+    -fx-hgap: 15;
+    -fx-vgap: 15;
+    -fx-background-radius: 0 0 25 25;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 4);
+    -fx-alignment: Center;
+}
+.field_view Button{
+    -fx-background-color: #588b8b;
+    -fx-text-fill: #ffd5c2;
+    -fx-font-family: "Calibri Light";
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-pref-width: 150;
+    -fx-pref-height: 30;
+}
+.field_view Button:hover{
+    -fx-scale-x:1.05 ;
+    -fx-cursor: hand;
+    -fx-scale-y: 1.05 ;
+}
+
+/* Global TableView styling */
+.table-view {
+    -fx-background-color: rgba(255, 255, 255, 0.7);
+    -fx-border-color: #d0e5ff;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
+    -fx-padding: 8px;
+    -fx-table-cell-border-color: transparent;
+}
+
+/* Header styling */
+.table-view .column-header-background {
+    -fx-background-color: #588b8b;
+    -fx-border-color: transparent;
+    -fx-background-radius: 10;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: #588b8b;
+    -fx-font-family: "Calibri Light";
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+    -fx-alignment: CENTER;
+}
+
+/* Cell styling */
+.table-cell {
+    -fx-text-fill: #333333;
+    -fx-font-size: 13px;
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 6px;
+}
+
+/* Row styling */
+.table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f6f9ff;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #e2f0ff;
+    -fx-text-fill: black;
+}
+
+/* Scrollbar (optional) */
+.table-view .scroll-bar:vertical {
+    -fx-pref-width: 1px;
+}
+
+.table-view .thumb {
+    -fx-background-color: #588b8b;
+    -fx-background-radius: 6;
+}
+
+.table-view .thumb:hover {
+    -fx-background-color: grey;
+}
+

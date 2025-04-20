@@ -1,6 +1,7 @@
 package com.example.travelwise.controllers.Client;
 
 import com.example.travelwise.models.Model;
+import com.example.travelwise.views.ClientMenuOptions;
 import javafx.scene.control.Button;
 import javafx.fxml.Initializable;
 import javafx.stage.Stage;
@@ -31,13 +32,13 @@ public class ClientMenuController implements Initializable {
         logout_btn.setOnAction(actionEvent -> onLogout());
     }
     private void onDashboard() {
-        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set("Dashboard");
+        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.DASHBOARD);
     }
     private void onFlights() {
-        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set("Flights");
+        Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.FLIGHT);
     }
-    private void onHotels(){Model.getInstance().getViewFactory().getClientSelectedMenuItem().set("Hotels");}
-    private void onProfile() {Model.getInstance().getViewFactory().getClientSelectedMenuItem().set("Profile");}
+    private void onHotels(){Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.HOTELS);}
+    private void onProfile() {Model.getInstance().getViewFactory().getClientSelectedMenuItem().set(ClientMenuOptions.PROFILE);}
     private void onLogout() {
         Stage stage = (Stage) logout_btn.getScene().getWindow();
         Model.getInstance().getViewFactory().closeStage(stage);

@@ -1,8 +1,12 @@
 package com.example.travelwise.controllers.Admin;
 
+import com.example.travelwise.models.Model;
+import com.example.travelwise.views.AdminMenuOptions;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,5 +24,21 @@ public class AdminMenuController implements Initializable {
     public Button logout_admin;
 
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {}
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        addListeners();
+    }
+
+    private void addListeners() {
+        logout_admin.setOnAction(actionEvent -> onLogout());
+        flights_admin.setOnAction(actionEvent -> onFlight_admin());
+
+    }
+    private void onFlight_admin() {
+        Model.getInstance().getViewFactory().getAdminSelectedMenuItem().set(AdminMenuOptions.FLIGHT);
+    }
+    private void onLogout() {
+        Stage stage = (Stage) logout_admin.getScene().getWindow();
+        Model.getInstance().getViewFactory().closeStage(stage);
+        Model.getInstance().getViewFactory().showLoginView();
+    }
 }

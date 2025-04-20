@@ -9,20 +9,25 @@ public class DBConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/travelwise";
     private static final String USER = "root";
     private static final String PASSWORD = "";
+    private Connection connection;
 
-    private static Connection connection;
+    private static DBConnection instance;
 
-    public static Connection getConnection() {
-        if (connection == null) {
-            try {
-                connection = DriverManager.getConnection(URL, USER, PASSWORD);
-                System.out.println("✅ Connexion à la base réussie !");
-            } catch (SQLException e) {
-                System.err.println("❌ Erreur de connexion à la base : " + e.getMessage());
-            }
+    private DBConnection() {
+        try{
+            connection = DriverManager.getConnection(URL,USER,PASSWORD);
+            System.out.println("connected!");
         }
-        return connection;
+        catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
     }
-
+    public static DBConnection getInstance() {
+        if (instance == null) {
+            instance = new DBConnection();
+        }
+        return instance;
+    }
+    public Connection getConnection() {return connection;}
 
 }

@@ -8,12 +8,15 @@ import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-public class FlightServices {
+public class FlightServices implements Services{
+    private Connection connection;
+    public FlightServices() {connection=DBConnection.getInstance().getConnection();}
     // ✅ CREATE
-    public void addFlight(FlightModel flight) throws SQLException {
+    public void addFlight(FlightModel flight) {
         String sql = "INSERT INTO flights (flight_number, airline, origin, destination, departure_date, return_date, class_type, status, price) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, flight.getFlightNumber());
             ps.setString(2, flight.getAirline());
             ps.setString(3, flight.getOrigin());
@@ -24,15 +27,19 @@ public class FlightServices {
             ps.setString(8, flight.getStatus());
             ps.setDouble(9, flight.getPrice());
             ps.executeUpdate();
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
         }
     }
 
     // ✅ READ
-    public static List<FlightModel> getAllFlights() throws SQLException {
+    public  List<FlightModel> getAllFlights()  {
         List<FlightModel> flights = new ArrayList<>();
         String sql = "SELECT * FROM flights";
 
-        try (Connection con = DBConnection.getConnection(); Statement st = con.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 FlightModel f = new FlightModel();
                 f.setFlight_id(rs.getInt("id"));
@@ -47,15 +54,17 @@ public class FlightServices {
                 f.setPrice(rs.getDouble("price"));
                 flights.add(f);
             }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
-
         return flights;
     }
 
     // ✅ UPDATE
-    public void updateFlight(FlightModel flight) throws SQLException {
+    public void updateFlight(FlightModel flight)  {
         String sql = "UPDATE flights SET flight_number=?, airline=?, origin=?, destination=?, departure_date=?, return_date=?, class_type=?, status=?, price=? WHERE id=?";
-        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try  {
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, flight.getFlightNumber());
             ps.setString(2, flight.getAirline());
             ps.setString(3, flight.getOrigin());
@@ -67,15 +76,20 @@ public class FlightServices {
             ps.setDouble(9, flight.getPrice());
             ps.setInt(10, flight.getFlight_id());
             ps.executeUpdate();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
         }
     }
 
     // ✅ DELETE
-    public void deleteFlight(int id) throws SQLException {
+    public void deleteFlight(int id)  {
         String sql = "DELETE FROM flights WHERE id=?";
-        try (Connection con = DBConnection.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
             ps.executeUpdate();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
         }
     }
 }

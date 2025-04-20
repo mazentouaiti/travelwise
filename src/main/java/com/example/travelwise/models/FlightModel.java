@@ -102,4 +102,20 @@ public class FlightModel {
         this.price = price;
     }
 
+    @Override
+    public String toString() {
+        return "Flight {" +
+                "ID=" + flight_id +
+                ", Flight Number='" + flight_number + '\'' +
+                ", Airline='" + airline + '\'' +
+                ", Origin='" + origin + '\'' +
+                ", Destination='" + destination + '\'' +
+                ", Class Type='" + classType + '\'' +
+                ", Status='" + status + '\'' +
+                ", Departure Date=" + departureDate +
+                ", Return Date=" + returnDate +
+                ", Price=" + price +
+                '}';
+    }
+
 }

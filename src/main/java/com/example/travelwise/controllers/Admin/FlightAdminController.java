@@ -154,11 +154,28 @@ public class FlightAdminController implements Initializable {
         arriv.setValue(null);
     }
 
+    private void populateFormWithFlight(FlightModel flight) {
+        id.setText(String.valueOf(flight.getFlight_id()));
+        flight_number.setText(flight.getFlightNumber());
+        origin.setText(flight.getOrigin());
+        destination.setText(flight.getDestination());
+        airline.setText(flight.getAirline());
+        price.setText(String.valueOf(flight.getPrice()));
+        status.setValue(flight.getStatus()); // ✅ ComboBox
+        depar.setValue(flight.getDepartureDate().toLocalDate());
+        arriv.setValue(flight.getReturnDate().toLocalDate());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         status.setItems(FXCollections.observableArrayList("Scheduled", "Delayed", "Cancelled", "Boarding", "Landed"));
         setupTableColumns();  // Don't forget this!
         loadFlights();        // Load data on startup
+        table_flight.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                populateFormWithFlight(newSelection);
+            }
+        });
 
 
     }

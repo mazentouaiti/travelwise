@@ -2,6 +2,7 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -39,17 +40,17 @@
             <TextField fx:id="destination" promptText="destination" GridPane.columnIndex="3" />
             <TextField fx:id="price" promptText="price" GridPane.rowIndex="1" />
             <TextField fx:id="airline" promptText="airline" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="status" layoutX="10.0" layoutY="43.0" promptText="Status" GridPane.rowIndex="2" />
             <TextField fx:id="aircraft" promptText="aircraft type" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="capacity" promptText="capacity" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <TextField fx:id="baggage" promptText="baggage fee" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Button fx:id="add_btn" mnemonicParsing="false" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="update_btn" mnemonicParsing="false" text="Update" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Button fx:id="delete_btn" mnemonicParsing="false" text="Delete" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button fx:id="add_btn" mnemonicParsing="false" onAction="#addFlight" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="update_btn" mnemonicParsing="false" onAction="#updateFlight" text="Update" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <Button fx:id="delete_btn" mnemonicParsing="false" onAction="#deleteFlight" text="Delete" GridPane.columnIndex="3" GridPane.rowIndex="3" />
             <DatePicker fx:id="depar" promptText="Departure" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <DatePicker fx:id="arriv" promptText="Arrival" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+         <ComboBox fx:id="status" editable="true" prefHeight="26.0" prefWidth="222.0" promptText="status" GridPane.rowIndex="2" />
         </GridPane>
-        <TableView prefHeight="473.0" prefWidth="1000.0">
+        <TableView fx:id="table_flight" prefHeight="473.0" prefWidth="1000.0">
             <columns>
                 <TableColumn fx:id="id_col" prefWidth="49.0" text="id" />
                 <TableColumn fx:id="numbcol" prefWidth="76.0" text="number" />

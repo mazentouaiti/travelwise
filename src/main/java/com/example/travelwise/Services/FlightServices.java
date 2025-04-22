@@ -13,19 +13,22 @@ public class FlightServices implements Services{
     public FlightServices() {connection=DBConnection.getInstance().getConnection();}
     // ✅ CREATE
     public void addFlight(FlightModel flight) {
-        String sql = "INSERT INTO flights (flight_number, airline, origin, destination, departure_date, return_date, class_type, status, price) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO flights (flight_id,flight_number, airline, origin, destination, departureDate, return_date, class_type, status, price) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         try {
+
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, flight.getFlightNumber());
-            ps.setString(2, flight.getAirline());
-            ps.setString(3, flight.getOrigin());
-            ps.setString(4, flight.getDestination());
-            ps.setDate(5, flight.getDepartureDate());
-            ps.setDate(6, flight.getReturnDate());
-            ps.setString(7, flight.getClassType());
-            ps.setString(8, flight.getStatus());
-            ps.setDouble(9, flight.getPrice());
+            ps.setInt(1, flight.getFlight_id());
+            ps.setString(2, flight.getFlightNumber());
+            ps.setString(3, flight.getAirline());
+            ps.setString(4, flight.getOrigin());
+            ps.setString(5, flight.getDestination());
+            ps.setDate(6, flight.getDepartureDate());
+            ps.setDate(7, flight.getReturnDate());
+            ps.setString(8, flight.getClassType());
+            ps.setString(9, flight.getStatus());
+            ps.setDouble(10, flight.getPrice());
+
             ps.executeUpdate();
         } catch (SQLException e){
             System.out.println(e.getMessage());
@@ -42,12 +45,12 @@ public class FlightServices implements Services{
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 FlightModel f = new FlightModel();
-                f.setFlight_id(rs.getInt("id"));
+                f.setFlight_id(rs.getInt("flight_id"));
                 f.setFlightNumber(rs.getString("flight_number"));
                 f.setAirline(rs.getString("airline"));
                 f.setOrigin(rs.getString("origin"));
                 f.setDestination(rs.getString("destination"));
-                f.setDepartureDate(rs.getDate("departure_date"));
+                f.setDepartureDate(rs.getDate("departureDate"));
                 f.setReturnDate(rs.getDate("return_date"));
                 f.setClassType(rs.getString("class_type"));
                 f.setStatus(rs.getString("status"));
@@ -62,7 +65,7 @@ public class FlightServices implements Services{
 
     // ✅ UPDATE
     public void updateFlight(FlightModel flight)  {
-        String sql = "UPDATE flights SET flight_number=?, airline=?, origin=?, destination=?, departure_date=?, return_date=?, class_type=?, status=?, price=? WHERE id=?";
+        String sql = "UPDATE flights SET flight_number=?, airline=?, origin=?, destination=?, departureDate=?, return_date=?, class_type=?, status=?, price=? WHERE flight_id=?";
         try  {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, flight.getFlightNumber());
@@ -83,7 +86,7 @@ public class FlightServices implements Services{
 
     // ✅ DELETE
     public void deleteFlight(int id)  {
-        String sql = "DELETE FROM flights WHERE id=?";
+        String sql = "DELETE FROM flights WHERE flight_id=?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);

@@ -6,6 +6,9 @@ module com.example.travelwise {
     requires java.desktop;
 
     opens com.example.travelwise to javafx.fxml;
+    opens com.example.travelwise.controllers to javafx.fxml;
+    opens com.example.travelwise.controllers.Admin to javafx.fxml;
+    opens com.example.travelwise.models to javafx.fxml;
     exports com.example.travelwise;
     exports com.example.travelwise.controllers;
     exports com.example.travelwise.views;

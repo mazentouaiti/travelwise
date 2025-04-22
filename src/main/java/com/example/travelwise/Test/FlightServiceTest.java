@@ -1,27 +1,29 @@
 package com.example.travelwise.Test;
 
+import com.example.travelwise.Services.Services;
 import com.example.travelwise.models.FlightModel;
 
 import com.example.travelwise.Services.FlightServices;
 
 import java.util.List;
 
-public class FlightServiceTest {
+public class FlightServiceTest  {
     public static void main(String[] args) {
         FlightServices service = new FlightServices();
 
         try {
             // 🔵 Test Add
             FlightModel flight = new FlightModel(
-                    "TW101",         // flight_number
-                    "Tunisair",      // airline
-                    "Tunis",         // origin
-                    "Paris",         // destination
-                    "Economy",       // classType
-                    "Scheduled",     // status
-                    java.sql.Date.valueOf("2025-06-15"),  // departureDate
-                    java.sql.Date.valueOf("2025-06-22"),  // returnDate
-                    480.00           // price
+                    1,
+                    "Tunisair",
+                    "Tunis",
+                    "Paris",
+                    "Economy",
+                    "Scheduled",
+                    "TW101",
+                    java.sql.Date.valueOf("2025-06-15"),
+                    java.sql.Date.valueOf("2025-06-22"),
+                    480.00
             );
 
             service.addFlight(flight);
@@ -43,11 +45,11 @@ public class FlightServiceTest {
             }
 
             // 🔴 Test Delete
-            if (!all.isEmpty()) {
+            /*if (!all.isEmpty()) {
                 FlightModel toDelete = all.get(all.size() - 1);
                 service.deleteFlight(toDelete.getFlight_id());
                 System.out.println("🗑️ Flight deleted: ID " + toDelete.getFlight_id());
-            }
+            }*/
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,18 +1,19 @@
 package com.example.travelwise.models;
 
-import java.util.Date;
+import java.sql.Date;
 
 
 
 public class FlightModel {
     private int flight_id;
     private String airline, origin, destination, classType, status,flight_number;
-    private java.sql.Date departureDate, returnDate;
+    private Date departureDate, returnDate;
     private double price;
 
     public FlightModel(int flight_id, String airline, String origin, String destination, String classType, String status, String flight_number,
                        java.sql.Date departureDate, java.sql.Date returnDate, double price) {
         this.flight_id = flight_id;
+        this.flight_number = flight_number;
         this.airline = airline;
         this.origin = origin;
         this.destination = destination;
@@ -21,7 +22,7 @@ public class FlightModel {
         this.departureDate = departureDate;
         this.returnDate = returnDate;
         this.price = price;
-        this.flight_number = flight_number;
+
 
     }
     public FlightModel(String airline, String origin, String destination, String classType, String status,String flight_number,

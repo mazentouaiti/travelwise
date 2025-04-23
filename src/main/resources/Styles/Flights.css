@@ -14,7 +14,7 @@
 }
 .title_pane{
     -fx-background-color: #588b8b;
-    -fx-background-radius: 0 0 25 0;
+    -fx-background-radius: 0 0 25 25;
     -fx-pref-height: 55;
     -fx-pref-width: 300;
     -fx-padding:15;
@@ -35,7 +35,6 @@
     -fx-font-family: "Calibri Light";
     -fx-font-size: 1.5em;
     -fx-font-weight: bold;
-    -fx-padding: 20;
     -fx-alignment: center_left;
 
 }

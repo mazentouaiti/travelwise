@@ -99,6 +99,71 @@ public class FlightServices implements Services{
             System.out.println(e.getMessage());
         }
     }
+    public List<FlightModel> searchFlights(String departure, String destination,
+                                           Date departureDate,
+                                           String priceFilter) {
+        List<FlightModel> flights = new ArrayList<>();
+        StringBuilder sql = new StringBuilder("SELECT * FROM flights WHERE 1=1");
 
+        // Add conditions based on parameters
+        if (departure != null) {
+            sql.append(" AND origin LIKE ?");
+        }
+        if (destination != null) {
+            sql.append(" AND destination LIKE ?");
+        }
+        if (departureDate != null) {
+            sql.append(" AND departureDate = ?");
+        }
+
+        if (priceFilter != null && !priceFilter.equals("All")) {
+            switch (priceFilter) {
+                case "Under 100€":
+                    sql.append(" AND price < 100");
+                    break;
+                case "100–300€":
+                    sql.append(" AND price BETWEEN 100 AND 300");
+                    break;
+                case "Above 300€":
+                    sql.append(" AND price > 300");
+                    break;
+            }
+        }
+
+        try (PreparedStatement ps = connection.prepareStatement(sql.toString())) {
+            int paramIndex = 1;
+
+            if (departure != null) {
+                ps.setString(paramIndex++, "%" + departure + "%");
+            }
+            if (destination != null) {
+                ps.setString(paramIndex++, "%" + destination + "%");
+            }
+            if (departureDate != null) {
+                ps.setDate(paramIndex++, departureDate);
+            }
+
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                FlightModel flight = new FlightModel();
+                flight.setFlight_id(rs.getInt("flight_id"));
+                flight.setFlightNumber(rs.getString("flight_number"));
+                flight.setAirline(rs.getString("airline"));
+                flight.setOrigin(rs.getString("origin"));
+                flight.setDestination(rs.getString("destination"));
+                flight.setDepartureDate(rs.getDate("departureDate"));
+                flight.setReturnDate(rs.getDate("return_date"));
+                flight.setClassType(rs.getString("class_type"));
+                flight.setStatus(rs.getString("status"));
+                flight.setPrice(rs.getDouble("price"));
+                flight.setCapacity(rs.getInt("capacity"));
+                flights.add(flight);
+            }
+        } catch (SQLException e) {
+            System.out.println("Error searching flights: " + e.getMessage());
+        }
+        return flights;
+    }
 
 }

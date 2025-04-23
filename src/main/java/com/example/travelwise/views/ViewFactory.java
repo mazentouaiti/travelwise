@@ -2,7 +2,6 @@ package com.example.travelwise.views;
 
 import com.example.travelwise.controllers.Admin.AdminController;
 import com.example.travelwise.controllers.Client.ClientController;
-import com.example.travelwise.controllers.SignupController;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +17,7 @@ public class ViewFactory {
     private AnchorPane flightView;
     private AnchorPane profileView;
     private AnchorPane hotelsView;
-    private AnchorPane signupView;
+    //private AnchorPane signupView;
 
     //AdminViews
     private final ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
@@ -111,7 +110,7 @@ public class ViewFactory {
     public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem() {
         return adminSelectedMenuItem;
     }
-    public AnchorPane getFlightAdminView(){
+    /*public AnchorPane getFlightAdminView(){
         if (FlightAdminView == null) {
             try {
                 FlightAdminView = new FXMLLoader(getClass().getResource("/Fxml/Admin/FlightAdmin.fxml")).load();
@@ -120,7 +119,7 @@ public class ViewFactory {
             }
         }
         return FlightAdminView;
-    }
+    }*/
 
     private void createStage(FXMLLoader loader) {
         Scene scene = null;

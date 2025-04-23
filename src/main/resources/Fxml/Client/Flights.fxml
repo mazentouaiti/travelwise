@@ -15,9 +15,9 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Client.FlightsController">
-    <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="850.0" stylesheets="@../../Styles/Flights.css" vbarPolicy="NEVER">
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="961.0" prefWidth="850.0" styleClass="flights_view">
-            <ImageView fitHeight="1612.0" fitWidth="921.0" layoutX="-17.0" layoutY="-26.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-17.0" AnchorPane.rightAnchor="-36.20394287109377" AnchorPane.topAnchor="-651.0">
+    <ScrollPane hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="742.0" prefWidth="850.0" stylesheets="@../../Styles/Flights.css" vbarPolicy="NEVER">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="742.0" prefWidth="850.0" styleClass="flights_view">
+            <ImageView fitHeight="1611.0" fitWidth="904.0" layoutX="-16.8" layoutY="-863.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="-16.8" AnchorPane.rightAnchor="-37.0" AnchorPane.topAnchor="-867.0">
                 <Image url="@../../images/bgfl.jpg" />
             </ImageView>
             <Label layoutX="275.0" layoutY="7.0" styleClass="title_pane" text="Search flights" AnchorPane.topAnchor="0.0">
@@ -52,7 +52,7 @@
                 </ComboBox>
                 <Button fx:id="search_btn" layoutX="504.0" layoutY="14.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="254.0" text="Search" AnchorPane.leftAnchor="504.0" AnchorPane.rightAnchor="14.0" />
             </AnchorPane>
-            <TableView fx:id="tableview_flights" layoutX="15.0" layoutY="325.0" prefHeight="542.0" prefWidth="820.0" styleClass="tableau_vols">
+            <TableView fx:id="tableview_flights" layoutX="15.0" layoutY="325.0" prefHeight="314.0" prefWidth="820.0" styleClass="tableau_vols">
               <columns>
                   <TableColumn fx:id="airlinecol" prefWidth="75.0" text="AirLine" />
                   <TableColumn fx:id="departurecol" prefWidth="75.0" text="Departure" />
@@ -65,8 +65,8 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                 </columnResizePolicy>
             </TableView>
-            <Button fx:id="reserv_btn" layoutX="225.0" layoutY="896.0" mnemonicParsing="false" styleClass="resserv_btn" text="Reserve" AnchorPane.bottomAnchor="20.0" />
-            <Button fx:id="pay_btn" layoutX="482.0" layoutY="901.6" mnemonicParsing="false" styleClass="pay_btn" text="Pay" AnchorPane.bottomAnchor="20.0" />
+            <Button fx:id="reserv_btn" layoutX="221.0" layoutY="670.0" mnemonicParsing="false" styleClass="resserv_btn" text="Reserve" />
+            <Button fx:id="pay_btn" layoutX="478.0" layoutY="670.0" mnemonicParsing="false" styleClass="pay_btn" text="Pay" />
         </AnchorPane>
     </ScrollPane>
 </AnchorPane>

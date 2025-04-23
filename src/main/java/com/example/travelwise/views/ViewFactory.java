@@ -17,6 +17,7 @@ public class ViewFactory {
     private AnchorPane flightView;
     private AnchorPane profileView;
     private AnchorPane hotelsView;
+    private AnchorPane ReservationFlightView;
     //private AnchorPane signupView;
 
     //AdminViews
@@ -61,6 +62,10 @@ public class ViewFactory {
             }
         }
         return flightView;
+    }
+    public void showReservationFlightView(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/windowReservation.fxml"));
+        createStage(loader);
     }
 
     public AnchorPane getHotelsView() {
@@ -110,16 +115,7 @@ public class ViewFactory {
     public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem() {
         return adminSelectedMenuItem;
     }
-    /*public AnchorPane getFlightAdminView(){
-        if (FlightAdminView == null) {
-            try {
-                FlightAdminView = new FXMLLoader(getClass().getResource("/Fxml/Admin/FlightAdmin.fxml")).load();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-        return FlightAdminView;
-    }*/
+
 
     private void createStage(FXMLLoader loader) {
         Scene scene = null;

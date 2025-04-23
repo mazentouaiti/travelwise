@@ -2,6 +2,7 @@ package com.example.travelwise.controllers.Client;
 
 import com.example.travelwise.models.FlightModel;
 import com.example.travelwise.Services.FlightServices;
+import com.example.travelwise.models.Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -44,6 +45,7 @@ public class FlightsController implements Initializable {
             initializePriceComboBox();
             loadAllFlights();
             setupSearchButton();
+            reserv_btn.setOnAction(event -> onReserveBtnClicked());
          }
          private void initializeTableColumns() {
                 airlinecol.setCellValueFactory(new PropertyValueFactory<>("airline"));
@@ -113,6 +115,9 @@ public class FlightsController implements Initializable {
                 // Implement what happens when a flight is selected
                 System.out.println("Selected flight: " + flight.getFlightNumber());
                 // You can add the flight to a reservation cart or show details
+        }
+        private void onReserveBtnClicked() {
+            Model.getInstance().getViewFactory().showReservationFlightView();
         }
 }
 

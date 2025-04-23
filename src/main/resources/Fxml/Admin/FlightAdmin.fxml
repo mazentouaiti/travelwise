@@ -16,7 +16,7 @@
 
 <AnchorPane prefHeight="750.0" prefWidth="1000.0" styleClass="flight_view" stylesheets="@../../Styles/FlightAdmin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Admin.FlightAdminController">
     <VBox layoutX="31.0" layoutY="58.0" prefHeight="750.0" prefWidth="1000.0" styleClass="Vbox" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <Label styleClass="title" text="Flight Management">
+        <Label prefHeight="70.0" prefWidth="302.0" styleClass="title" text="Flight Management">
             <graphic>
                 <FontAwesomeIconView glyphName="PLANE" size="30" />
             </graphic>
@@ -40,15 +40,14 @@
             <TextField fx:id="destination" promptText="destination" GridPane.columnIndex="3" />
             <TextField fx:id="price" promptText="price" GridPane.rowIndex="1" />
             <TextField fx:id="airline" promptText="airline" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="aircraft" promptText="aircraft type" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="capacity" promptText="capacity" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextField fx:id="baggage" promptText="baggage fee" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <TextField fx:id="capacity" promptText="capacity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button fx:id="add_btn" mnemonicParsing="false" onAction="#addFlight" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Button fx:id="update_btn" mnemonicParsing="false" onAction="#updateFlight" text="Update" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <Button fx:id="delete_btn" mnemonicParsing="false" onAction="#deleteFlight" text="Delete" GridPane.columnIndex="3" GridPane.rowIndex="3" />
             <DatePicker fx:id="depar" promptText="Departure" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <DatePicker fx:id="arriv" promptText="Arrival" GridPane.columnIndex="3" GridPane.rowIndex="1" />
          <ComboBox fx:id="status" editable="true" prefHeight="26.0" prefWidth="222.0" promptText="status" GridPane.rowIndex="2" />
+         <Button fx:id="create_btn" mnemonicParsing="false" onAction="#createFlight" text="Create" GridPane.rowIndex="3" />
         </GridPane>
         <TableView fx:id="table_flight" prefHeight="473.0" prefWidth="1000.0">
             <columns>
@@ -58,9 +57,7 @@
                 <TableColumn fx:id="desticol" prefWidth="99.0" text="destination" />
                 <TableColumn fx:id="statcol" prefWidth="70.0" text="Status" />
                 <TableColumn fx:id="airlcol" prefWidth="75.0" text="airline" />
-                <TableColumn fx:id="aircrcol" prefWidth="75.0" text="aircraft" />
                 <TableColumn fx:id="capacol" prefWidth="75.0" text="Capacity" />
-                <TableColumn fx:id="baggcol" prefWidth="75.0" text="Baggage" />
                 <TableColumn fx:id="pricecol" prefWidth="75.0" text="Price" />
                 <TableColumn fx:id="deparcol" prefWidth="75.0" text="Depart" />
                 <TableColumn fx:id="arrivcol" prefWidth="75.0" text="Arrival" />

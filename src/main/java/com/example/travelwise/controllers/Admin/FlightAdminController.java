@@ -15,36 +15,37 @@ import java.util.ResourceBundle;
 
 public class FlightAdminController implements Initializable {
 
-/*
-    public TextField id;
-    public TextField flight_number;
-    public TextField origin;
-    public TextField destination;
-    public TextField price;
-    public TextField airline;
-    public TextField status;
-    public TextField aircraft;
-    public TextField capacity;
-    public TextField baggage;
-    public Button add_btn;
-    public Button update_btn;
-    public Button delete_btn;
-    public DatePicker depar;
-    public DatePicker arriv;
-    public TableColumn id_col;
-    public TableColumn numbcol;
-    public TableColumn orgincol;
-    public TableColumn desticol;
-    public TableColumn statcol;
-    public TableColumn airlcol;
-    public TableColumn aircrcol;
-    public TableColumn capacol;
-    public TableColumn baggcol;
-    public TableColumn pricecol;
-    public TableColumn deparcol;
-    public TableColumn arrivcol;
-    public TableView table_flight;
-*/
+
+    /*
+        public TextField id;
+        public TextField flight_number;
+        public TextField origin;
+        public TextField destination;
+        public TextField price;
+        public TextField airline;
+        public TextField status;
+        public TextField aircraft;
+        public TextField capacity;
+        public TextField baggage;
+        public Button add_btn;
+        public Button update_btn;
+        public Button delete_btn;
+        public DatePicker depar;
+        public DatePicker arriv;
+        public TableColumn id_col;
+        public TableColumn numbcol;
+        public TableColumn orgincol;
+        public TableColumn desticol;
+        public TableColumn statcol;
+        public TableColumn airlcol;
+        public TableColumn aircrcol;
+        public TableColumn capacol;
+        public TableColumn baggcol;
+        public TableColumn pricecol;
+        public TableColumn deparcol;
+        public TableColumn arrivcol;
+        public TableView table_flight;
+    */
     @FXML private TextField id;
     @FXML private TextField flight_number;
     @FXML private TextField origin;
@@ -52,17 +53,13 @@ public class FlightAdminController implements Initializable {
     @FXML private TextField price;
     @FXML private TextField airline;
     @FXML private ComboBox status;
-    /*
-    @FXML private TextField aircraft;
     @FXML private TextField capacity;
-    @FXML private TextField baggage;
-
-     */
     @FXML private DatePicker depar;
     @FXML private DatePicker arriv;
     @FXML private Button add_btn;
     @FXML private Button update_btn;
     @FXML private Button delete_btn;
+    @FXML private Button create_btn;
     @FXML private TableView<FlightModel> table_flight;
     @FXML private TableColumn<FlightModel, Integer> id_col;
     @FXML private TableColumn<FlightModel, String> numbcol;
@@ -73,6 +70,7 @@ public class FlightAdminController implements Initializable {
     @FXML private TableColumn<FlightModel, Double> pricecol;
     @FXML private TableColumn<FlightModel, Date> deparcol;
     @FXML private TableColumn<FlightModel, Date> arrivcol;
+    @FXML private TableColumn<FlightModel, Integer> capacol;
 
     private final FlightServices flightService = new FlightServices();
 
@@ -87,6 +85,7 @@ public class FlightAdminController implements Initializable {
         pricecol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("price"));
         deparcol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("departureDate"));
         arrivcol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("returnDate"));
+        capacol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("capacity"));
     }
 
     @FXML
@@ -97,9 +96,13 @@ public class FlightAdminController implements Initializable {
     }
 
     @FXML
+    public void createFlight() {
+        id.setDisable(true);
+    }
+    @FXML
     public void addFlight() {
         FlightModel f = new FlightModel();
-        f.setFlight_id(Integer.parseInt(id.getText()));
+        //id.setText(String.valueOf(f.getFlight_id()));
         f.setFlightNumber(flight_number.getText());
         f.setOrigin(origin.getText());
         f.setDestination(destination.getText());
@@ -108,10 +111,16 @@ public class FlightAdminController implements Initializable {
         f.setPrice(Double.parseDouble(price.getText()));
         f.setDepartureDate(Date.valueOf(depar.getValue()));
         f.setReturnDate(Date.valueOf(arriv.getValue()));
+        f.setCapacity(Integer.parseInt(capacity.getText()));
         f.setClassType("Economy"); // or let user choose from dropdown
 
         flightService.addFlight(f);
         loadFlights();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Add Flight");
+        alert.setHeaderText(null);
+        alert.setContentText("Flight added");
+        alert.show();
         clearFields();
     }
 
@@ -119,6 +128,7 @@ public class FlightAdminController implements Initializable {
     public void updateFlight() {
         FlightModel f = new FlightModel();
         f.setFlight_id(Integer.parseInt(id.getText()));
+        id.setDisable(true);
         f.setFlightNumber(flight_number.getText());
         f.setOrigin(origin.getText());
         f.setDestination(destination.getText());
@@ -127,10 +137,16 @@ public class FlightAdminController implements Initializable {
         f.setPrice(Double.parseDouble(price.getText()));
         f.setDepartureDate(Date.valueOf(depar.getValue()));
         f.setReturnDate(Date.valueOf(arriv.getValue()));
+        f.setCapacity(Integer.parseInt(capacity.getText()));
         f.setClassType("Economy");
 
         flightService.updateFlight(f);
         loadFlights();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Update Flight");
+        alert.setHeaderText(null);
+        alert.setContentText("Flight updated");
+        alert.show();
         clearFields();
     }
 
@@ -139,6 +155,11 @@ public class FlightAdminController implements Initializable {
         int flightId = Integer.parseInt(id.getText());
         flightService.deleteFlight(flightId);
         loadFlights();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Delete Flight");
+        alert.setHeaderText(null);
+        alert.setContentText("Flight deleted");
+        alert.show();
         clearFields();
     }
 
@@ -152,6 +173,7 @@ public class FlightAdminController implements Initializable {
         price.clear();
         depar.setValue(null);
         arriv.setValue(null);
+        capacity.clear();
     }
 
     private void populateFormWithFlight(FlightModel flight) {
@@ -164,6 +186,7 @@ public class FlightAdminController implements Initializable {
         status.setValue(flight.getStatus()); // ✅ ComboBox
         depar.setValue(flight.getDepartureDate().toLocalDate());
         arriv.setValue(flight.getReturnDate().toLocalDate());
+        capacity.setText(String.valueOf(flight.getCapacity()));
     }
 
     @Override
@@ -173,6 +196,7 @@ public class FlightAdminController implements Initializable {
         loadFlights();        // Load data on startup
         table_flight.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
+                id.setDisable(true);
                 populateFormWithFlight(newSelection);
             }
         });

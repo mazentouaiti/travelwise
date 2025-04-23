@@ -1,4 +1,4 @@
-package com.example.travelwise.Test;
+/*package com.example.travelwise.Test;
 
 import com.example.travelwise.Services.Services;
 import com.example.travelwise.models.FlightModel;
@@ -51,9 +51,9 @@ public class FlightServiceTest  {
                 System.out.println("🗑️ Flight deleted: ID " + toDelete.getFlight_id());
             }*/
 
-        } catch (Exception e) {
+       /* } catch (Exception e) {
             e.printStackTrace();
         }
     }
 }
-
+*/

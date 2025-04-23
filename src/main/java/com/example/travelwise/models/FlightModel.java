@@ -5,13 +5,14 @@ import java.sql.Date;
 
 
 public class FlightModel {
-    private int flight_id;
+    private int flight_id , capacity;
     private String airline, origin, destination, classType, status,flight_number;
     private Date departureDate, returnDate;
     private double price;
 
+
     public FlightModel(int flight_id, String airline, String origin, String destination, String classType, String status, String flight_number,
-                       java.sql.Date departureDate, java.sql.Date returnDate, double price) {
+                       java.sql.Date departureDate, java.sql.Date returnDate, double price, int capacity) {
         this.flight_id = flight_id;
         this.flight_number = flight_number;
         this.airline = airline;
@@ -22,11 +23,12 @@ public class FlightModel {
         this.departureDate = departureDate;
         this.returnDate = returnDate;
         this.price = price;
+        this.capacity = capacity;
 
 
     }
     public FlightModel(String airline, String origin, String destination, String classType, String status,String flight_number,
-                       java.sql.Date departureDate, java.sql.Date returnDate, double price) {
+                       java.sql.Date departureDate, java.sql.Date returnDate, double price, int capacity) {
         this.airline = airline;
         this.origin = origin;
         this.destination = destination;
@@ -36,6 +38,7 @@ public class FlightModel {
         this.returnDate = returnDate;
         this.price = price;
         this.flight_number = flight_number;
+        this.capacity = capacity;
 
     }
 
@@ -88,11 +91,11 @@ public class FlightModel {
     public void setDepartureDate(Date departureDate) {
         this.departureDate = (java.sql.Date) departureDate;
     }
-
+    public int getCapacity() {return capacity;}
+    public void setCapacity(int capacity) {this.capacity = capacity;}
     public java.sql.Date getReturnDate() {
         return returnDate;
     }
-
     public void setReturnDate(Date returnDate) {
         this.returnDate = (java.sql.Date) returnDate;
     }
@@ -116,6 +119,7 @@ public class FlightModel {
                 ", Departure Date=" + departureDate +
                 ", Return Date=" + returnDate +
                 ", Price=" + price +
+                ", Capacity=" + capacity +
                 '}';
     }
 

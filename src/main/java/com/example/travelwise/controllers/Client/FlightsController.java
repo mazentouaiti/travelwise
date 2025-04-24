@@ -37,6 +37,7 @@ public class FlightsController implements Initializable {
 
         private FlightServices flightServices;
         private ObservableList<FlightModel> flightsList;
+        private FlightModel selectedFlight;
         private ToggleGroup toggleGroup = new ToggleGroup();
         @Override
          public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -113,12 +114,21 @@ public class FlightsController implements Initializable {
 
         private void handleFlightSelection(FlightModel flight) {
                 // Implement what happens when a flight is selected
-                System.out.println("Selected flight: " + flight.getFlightNumber());
+            selectedFlight = flight;
+            System.out.println("Selected flight: " + flight.getFlightNumber());
                 // You can add the flight to a reservation cart or show details
         }
         private void onReserveBtnClicked() {
-            Model.getInstance().getViewFactory().showReservationFlightView();
-        }
+            if (selectedFlight != null) {
+            Model.getInstance().getViewFactory().showReservationFlightView(selectedFlight);
+        }else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText(null);
+                alert.setContentText("No flight selected");
+                alert.show();
+            }
+            }
 }
 
 

@@ -2,12 +2,17 @@ package com.example.travelwise.views;
 
 import com.example.travelwise.controllers.Admin.AdminController;
 import com.example.travelwise.controllers.Client.ClientController;
+import com.example.travelwise.controllers.Client.WindowReservationController;
+import com.example.travelwise.models.FlightModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class ViewFactory {
     private AccountType loginAccountType;
@@ -63,9 +68,20 @@ public class ViewFactory {
         }
         return flightView;
     }
-    public void showReservationFlightView(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/windowReservation.fxml"));
-        createStage(loader);
+    public void showReservationFlightView(FlightModel selectedFlight) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/windowReservation.fxml"));
+            Parent root = loader.load();
+            WindowReservationController controller = loader.getController();
+            controller.setSelectedFlight(selectedFlight);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Reservation");
+
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public AnchorPane getHotelsView() {

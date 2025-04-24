@@ -1,10 +1,8 @@
 package com.example.travelwise.controllers.Client;
 
+import com.example.travelwise.models.FlightModel;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -35,8 +33,29 @@ public class WindowReservationController implements Initializable {
     @javafx.fxml.FXML
     private TextField autoprice;
 
+    private FlightModel selectedFlight;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        classcombo.getItems().addAll("Economy", "Business", "First Class");
+        classcombo.setValue("Economy");
 
+        passanger_number.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100)); // 100 as a temporary max value
+
+    }
+    public void setSelectedFlight(FlightModel flight) {
+        this.selectedFlight = flight;
+        fillFormWithFlightData();
+    }
+    private void fillFormWithFlightData() {
+        if (selectedFlight != null) {
+            num_field.setText(selectedFlight.getFlightNumber());
+            id_field.setText(String.valueOf(selectedFlight.getFlight_id()));
+            origin_field.setText(selectedFlight.getOrigin());
+            dest_field.setText(selectedFlight.getDestination());
+            status_field.setText(selectedFlight.getStatus());
+            depart_field.setText(String.valueOf(selectedFlight.getDepartureDate()));
+
+
+        }
     }
 }

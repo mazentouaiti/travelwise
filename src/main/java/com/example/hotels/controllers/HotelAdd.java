@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,40 +16,44 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+public class HotelAdd  {
 
-public class HotelAdd {
+    @FXML private TextField namefield;
+
+    @FXML private TextField cityfield;
+    @FXML private TextField addressfield;
+    @FXML private TextField countryfield;
+    @FXML private TextField pricefield;
+    @FXML private Label albumlabel;
+    @FXML private TextArea descriptionfield;
+    @FXML private HBox getStarBox;
+    @FXML private Spinner capacityspinner;
+    @FXML private CheckBox wifi, pool, meals, air, parking;
     @FXML private ComboBox<String> typeCombo;
-
-    @FXML private TextField subjectField;
-    @FXML private TextArea messageArea;
     @FXML private Label fileLabel;
     @FXML private HBox starBox;
-    @FXML
-    private Stage stage;
+    @FXML private Stage stage;
     @FXML private Scene scene;
 
     private File selectedFile;
-    private IntegerProperty rating = new SimpleIntegerProperty(0);
+    private final IntegerProperty rating = new SimpleIntegerProperty(0);
     private List<String> selectedOptions = new ArrayList<>();
-
-    public HotelAdd() {
-
-    }
+    private Hebergement hebergementToEdit ;
+    boolean disponibility;
 
     @FXML
     public void initialize() {
-        setupOptionCheckboxes();
-        SpinnerValueFactory<Integer> capacityFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0); // min, max, valeur par défaut
+
+        SpinnerValueFactory<Integer> capacityFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 5000, 0); // min, max, valeur par défaut
         capacityspinner.setValueFactory(capacityFactory);
         typeCombo.getItems().addAll("Hotel", "House", "Apartment", "Villa","Hostel","Bungalow");
+        setupOptionCheckboxes();
 
         // Setup stars
         int maxStars = 5;
@@ -68,6 +73,9 @@ public class HotelAdd {
                 stars[i].setText(i < newVal.intValue() ? "★" : "☆");
             }
         });
+
+
+
     }
 
     @FXML
@@ -77,64 +85,41 @@ public class HotelAdd {
         selectedFile = fileChooser.showOpenDialog(new Stage());
 
         if (selectedFile != null) {
-            fileLabel.setText(selectedFile.getName());
+            fileLabel.setText(selectedFile.getAbsolutePath());
         } else {
             fileLabel.setText("No file selected");
         }
     }
-
     @FXML
-    private void handleSubmit() {
-        System.out.println("Type: " + typeCombo.getValue());
-        System.out.println("Subject: " + subjectField.getText());
-        System.out.println("Message: " + messageArea.getText());
-        System.out.println("File: " + (selectedFile != null ? selectedFile.getAbsolutePath() : "None"));
-        System.out.println("Rating: " + rating.get());
-    }
+    private void handleChooseAlbum() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choisir des images pour l'album");
 
+// Filtrer uniquement les images
+        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Images", "*.jpg", "*.png", "*.jpeg");
+        fileChooser.getExtensionFilters().add(imageFilter);
 
-    @FXML
-    private void handleClear() {
-        typeCombo.getSelectionModel().clearSelection();
-        subjectField.clear();
-        messageArea.clear();
-        fileLabel.setText("No file selected");
-        selectedFile = null;
-        rating.set(0);
-    }
+// Choisir plusieurs fichiers
+        List<File> selectedFiles = fileChooser.showOpenMultipleDialog(null);
 
+        if (selectedFiles != null) {
+            List<String> imagePaths = new ArrayList<>();
+            for (File file : selectedFiles) {
+                imagePaths.add(file.getAbsolutePath());
+            }
 
-    public void switch_admin(ActionEvent event ) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/hotels/fxml/hotel_admin.fxml")));
-        stage= (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+            // Exemple : stocker le chemin en base séparé par des virgules
+            String albumPath = String.join("\n", imagePaths);
+            albumlabel.setText(albumPath);
+            System.out.println("Album sélectionné : " + albumPath);}
 
     }
-
-    @FXML private TextField namefield;
-
-    @FXML private TextField cityfield;
-    @FXML private TextField addressfield;
-    @FXML private TextField countryfield;
-    @FXML private TextField pricefield;
-    @FXML private CheckBox dispoCheck;
-    @FXML private TextField photofield;
-    @FXML private TextField albumfield;
-    @FXML private TextArea descriptionfield;
-    @FXML private TextField optionsfield;
-    @FXML private HBox getStarBox;
-    @FXML private Spinner capacityspinner;
-    @FXML
-    private CheckBox wifi, pool, meals, air, parking;
-
 
 
     private void setupOptionCheckboxes() {
         setupCheckboxListener(wifi, "Wi-Fi");
-        setupCheckboxListener(pool, "Piscine");
-        setupCheckboxListener(meals, "Repas");
+        setupCheckboxListener(pool, "Pool");
+        setupCheckboxListener(meals, "All Meals Included");
         setupCheckboxListener(air, "Air Conditioning");
         setupCheckboxListener(parking, "Parking");
     }
@@ -146,60 +131,13 @@ public class HotelAdd {
             } else {
                 selectedOptions.remove(label);
             }
-            // Affiche ou utilise la chaîne actuelle
             String joined = String.join(", ", selectedOptions);
             System.out.println("Options sélectionnées : " + joined);
         });
 
     }
 
-    String options = String.join(", ", selectedOptions);
 
-
-
-    @FXML
-    private void handleSubmit(ActionEvent event) {
-        try {
-            // Récupération des valeurs des champs
-
-            String name = namefield.getText();
-            String type = typeCombo.getValue().toString(); // assure-toi que le ComboBox a des valeurs
-            String city = cityfield.getText();
-            String address = addressfield.getText();
-            String country = countryfield.getText();
-            double price = Double.parseDouble(pricefield.getText());
-            //boolean dispo = dispoCheck.isSelected();
-            //String photo = photofield.getText();
-            //String album = albumfield.getText();
-            String description = descriptionfield.getText();
-            //int rating = getRatingFromStars(); // méthode à écrire
-            int capacity = (int) capacityspinner.getValue();
-            boolean disponibility;
-            if (capacity==0)
-                disponibility= false;
-            else
-                disponibility= true;
-
-            String options = String.join(", ", selectedOptions);
-
-            String photo = "chemin/";
-            String album = "chemin/";
-
-            int rating =5;
-            // Création de l'objet
-            Hebergement h = new Hebergement(name, type, city, address, country, price, disponibility, photo, album, description, options, rating, capacity);
-            h.setOptions(options);
-            // Appel du service
-            ServiceHebergement sh = new ServiceHebergement();
-            sh.ajouter(h);
-
-            // Message de succès
-            System.out.println("Ajout effectué avec succès !");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     private int getRatingFromStars() {
         int rating = 0;
@@ -214,6 +152,142 @@ public class HotelAdd {
         return rating;
     }
 
+    @FXML
+    private void handleSubmit(ActionEvent event) {
+        try {
+            // Validation simple
+            if (namefield.getText().isEmpty() || typeCombo.getValue() == null || cityfield.getText().isEmpty()) {
+                showAlert("Veuillez remplir les champs obligatoires.", Alert.AlertType.WARNING);
+                return;
+            }
 
+            String name = namefield.getText();
+            String type = typeCombo.getValue();
+            String city = cityfield.getText();
+            String address = addressfield.getText();
+            String country = countryfield.getText();
+            double price = Double.parseDouble(pricefield.getText());
+            String photo = fileLabel.getText();
+            String album = albumlabel.getText();
+            String description = descriptionfield.getText();
+            int rating = this.rating.get();
+            int capacity = (int) capacityspinner.getValue();
+            disponibility = capacity != 0;
+            String options = String.join(", ", selectedOptions);
+            String status = "waiting";
+
+            ServiceHebergement sh = new ServiceHebergement();
+
+            if (hebergementToEdit == null) {
+                // ➕ Ajout
+                Hebergement h = new Hebergement(name, type, city, address, country, price, disponibility, photo, album, description, options, rating, capacity,status);
+
+                sh.ajouter(h);
+                showAlert("Ajouté avec succès !", Alert.AlertType.INFORMATION);
+                clearForm();
+            } else {
+                // 🔁 Modification
+                hebergementToEdit.setName(name);
+                hebergementToEdit.setType(type);
+                hebergementToEdit.setCity(city);
+                hebergementToEdit.setAddress(address);
+                hebergementToEdit.setCountry(country);
+                hebergementToEdit.setPricePerNight(price);
+                hebergementToEdit.setPhoto(photo);
+                hebergementToEdit.setAlbum(album);
+                hebergementToEdit.setDescription(description);
+                hebergementToEdit.setOptions(options);
+                hebergementToEdit.setRating(rating);
+                hebergementToEdit.setCapacity(capacity);
+                hebergementToEdit.setDisponibility(disponibility);
+
+
+                sh.modifier(hebergementToEdit);
+                showAlert("Modification réussie !", Alert.AlertType.INFORMATION);
+                hebergementToEdit = null;
+            }
+
+            // 🧼 Réinitialisation du formulaire
+
+
+        } catch (NumberFormatException e) {
+            showAlert("Le prix doit être un nombre valide.", Alert.AlertType.ERROR);
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Une erreur est survenue.", Alert.AlertType.ERROR);
+        }
+    }
+    private void showAlert(String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle("Information");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void clearForm() {
+        namefield.clear();
+        typeCombo.setValue(null);
+        cityfield.clear();
+        addressfield.clear();
+        countryfield.clear();
+        pricefield.clear();
+        fileLabel.setText("");
+        albumlabel.setText("");
+        descriptionfield.clear();
+
+        // Réinitialiser les CheckBox
+        wifi.setSelected(false);
+        pool.setSelected(false);
+        meals.setSelected(false);
+        air.setSelected(false);
+        parking.setSelected(false);
+        selectedOptions.clear();
+
+        capacityspinner.getValueFactory().setValue(0);
+        rating.set(0);
+        disponibility = false;
+    }
+
+
+
+    public void initData(Hebergement h) {
+        this.hebergementToEdit = h;
+        namefield.setText(h.getName());
+        typeCombo.setValue(h.getType());
+        cityfield.setText(h.getCity());
+        addressfield.setText(h.getAddress());
+        countryfield.setText(h.getCountry());
+        pricefield.setText(String.valueOf(h.getPricePerNight()));
+        fileLabel.setText(h.getPhoto()); // ou extraire le nom du fichier si nécessaire
+        albumlabel.setText(h.getAlbum()); // si jamais tu veux le réutiliser
+        descriptionfield.setText(h.getDescription());
+        rating.set(h.getRating());
+        capacityspinner.getValueFactory().setValue(h.getCapacity());
+        // Si la capacité est > 0, on suppose que c'est disponible
+        // Mais tu peux aussi utiliser : disponibiliteCheckBox.setSelected(h.isDisponibility());
+        disponibility=(h.getCapacity() != 0);
+
+        String options = h.getOptions(); // exemple: "Wi-Fi, Pool, Parking"
+
+        if (options.contains("Wi-Fi")) wifi.setSelected(true);
+        if (options.contains("Pool")) pool.setSelected(true);
+        if (options.contains("Parking")) parking.setSelected(true);
+        if (options.contains("All Meals Included")) meals.setSelected(true);
+        if (options.contains("Air Conditioning")) air.setSelected(true);
+
+
+
+
+    }
+
+    public void switch_admin(ActionEvent event ) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/hotels/fxml/hotel_agence.fxml")));
+        stage= (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
 
 }

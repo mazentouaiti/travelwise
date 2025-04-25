@@ -7,7 +7,7 @@
     -fx-alignment: center;
     -fx-text-fill: #ffd5c2;
     -fx-font-family: "Caliabri Light";
-    -fx-font-weight: bold;
+
 
 }
 
@@ -15,10 +15,6 @@
     -fx-fill: #ffd5c2;
 }
 
-#label_offer{
-    -fx-font-family: "Calibri Light";
-    -fx-font-weight: bold;
-}
 
 .button {
     -fx-background-color: #ffd5c2;

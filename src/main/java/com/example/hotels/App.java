@@ -1,5 +1,4 @@
 package com.example.hotels;
-
 import com.example.hotels.utils.DBConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +22,6 @@ public class App extends Application {
 
 
     }
-
 
     public static void main(String[] args) {
         launch();

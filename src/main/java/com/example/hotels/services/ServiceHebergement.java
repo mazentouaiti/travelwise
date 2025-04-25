@@ -11,19 +11,20 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class ServiceHebergement {
 
-    private Connection cnx;
+    private final Connection cnx;
 
     public ServiceHebergement() {
         cnx = DBConnection.getConnection();
     }
 
     public void ajouter(Hebergement h) {
-        String req = "INSERT INTO hebergement (name, type, city, address, country, pricePerNight, disponibility, photo, album, description, options, rating, capacity) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String req = "INSERT INTO hebergement (name, type, city, address, country, pricePerNight, disponibility, photo, album, description, options, rating, capacity, status) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, h.getName());
@@ -39,6 +40,7 @@ public class ServiceHebergement {
             ps.setString(11, h.getOptions());
             ps.setInt(12, h.getRating());
             ps.setInt(13, h.getCapacity());
+            ps.setString(14, h.getStatus()); // ✔ ici c’est 14
             ps.executeUpdate();
             System.out.println("Hébergement ajouté");
         } catch (SQLException e) {
@@ -46,8 +48,9 @@ public class ServiceHebergement {
         }
     }
 
+
     public void modifier(Hebergement h) {
-        String req = "UPDATE hebergement SET name=?, type=?, city=?, address=?, country=?, pricePerNight=?, disponibility=?, photo=?, album=?, description=?, options=?, rating=?, capacity=? WHERE id=?";
+        String req = "UPDATE hebergement SET name=?, type=?, city=?, address=?, country=?, pricePerNight=?, disponibility=?, photo=?, album=?, description=?, options=?, rating=?, capacity=? ,status=? WHERE acc_id=?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
             ps.setString(1, h.getName());
@@ -63,7 +66,8 @@ public class ServiceHebergement {
             ps.setString(11, h.getOptions());
             ps.setInt(12, h.getRating());
             ps.setInt(13, h.getCapacity());
-            ps.setInt(14, h.getId());
+            ps.setString(14, h.getStatus());
+            ps.setInt(15, h.getId());
             ps.executeUpdate();
             System.out.println(" Hébergement modifié");
         } catch (SQLException e) {
@@ -71,11 +75,11 @@ public class ServiceHebergement {
         }
     }
 
-    public void supprimer(int id) {
-        String req = "DELETE FROM hebergement WHERE id=?";
+    public void supprimer(int acc_id) {
+        String req = "DELETE FROM hebergement WHERE acc_id=?";
         try {
             PreparedStatement ps = cnx.prepareStatement(req);
-            ps.setInt(1, id);
+            ps.setInt(1, acc_id);
             ps.executeUpdate();
             System.out.println(" Hébergement supprimé !");
         } catch (SQLException e) {
@@ -91,7 +95,7 @@ public class ServiceHebergement {
             ResultSet rs = st.executeQuery(req);
             while (rs.next()) {
                 Hebergement h = new Hebergement(
-                        rs.getInt("id"),
+                        rs.getInt("acc_id"),
                         rs.getString("name"),
                         rs.getString("type"),
                         rs.getString("city"),
@@ -104,7 +108,9 @@ public class ServiceHebergement {
                         rs.getString("description"),
                         rs.getString("options"),
                         rs.getInt("rating"),
-                        rs.getInt("capacity")
+                        rs.getInt("capacity"),
+                        rs.getString("status")
+
                 );
                 list.add(h);
             }
@@ -114,5 +120,14 @@ public class ServiceHebergement {
         }
         return list;
     }
+
+    public List<Hebergement> getHebergementsMisenAvant() {
+        return afficher().stream()
+                .filter(h -> "accepted".equals(h.getStatus()) )
+                .collect(Collectors.toList());
+    }
+
+
+
 }
 

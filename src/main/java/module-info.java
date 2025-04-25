@@ -9,4 +9,6 @@ module com.example.hotels {
     exports com.example.hotels;
     exports com.example.hotels.controllers;
     opens com.example.hotels.controllers to javafx.fxml;
+    opens com.example.hotels.models to javafx.base;
+
 }

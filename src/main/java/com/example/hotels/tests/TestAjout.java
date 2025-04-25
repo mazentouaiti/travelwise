@@ -18,7 +18,8 @@ public class TestAjout {
                 "Maison typique au cœur de la médina de Tunis",
                 "WiFi, Climatisation, Petit-déjeuner",
                 4,
-                2
+                2,
+                "attente"
         );
 
         ServiceHebergement service = new ServiceHebergement();

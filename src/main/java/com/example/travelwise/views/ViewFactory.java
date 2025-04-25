@@ -46,7 +46,7 @@ public class ViewFactory {
     public ObjectProperty<ClientMenuOptions> getClientSelectedMenuItem() {
         return clientSelectedMenuItem;
     }
-
+//***************************************************************************************
     public AnchorPane getDashboardView() {
         if (dashboardView == null) {
             try {
@@ -57,7 +57,7 @@ public class ViewFactory {
         }
         return dashboardView;
     }
-
+//************************************************************************************************
     public AnchorPane getFlightView() {
         if (flightView == null) {
             try{
@@ -83,7 +83,7 @@ public class ViewFactory {
             e.printStackTrace();
         }
     }
-
+//*******************************************************************************************************
     public AnchorPane getHotelsView() {
         if (hotelsView == null) {
             try {
@@ -94,7 +94,7 @@ public class ViewFactory {
         }
         return hotelsView;
     }
-
+//*********************************************************************************************************
     public AnchorPane getProfileView() {
         if (profileView == null) {
             try {
@@ -105,34 +105,36 @@ public class ViewFactory {
         }
         return profileView;
     }
-
+//************************************************************************************************************
     public void showLoginView() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
         createStage(loader);
     }
+    //************************************************************************************************************
     public void showSignupView() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Signup.fxml"));
         createStage(loader);
     }
-
+    //************************************************************************************************************
     public void showClientWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/Client.fxml"));
         ClientController clientController = new ClientController();
         loader.setController(clientController);
         createStage(loader);
     }
-
+    //************************************************************************************************************
     public void showAdminWindow(){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/Admin.fxml"));
         AdminController adminController = new AdminController();
         loader.setController(adminController);
         createStage(loader);
     }
+//********************************************************************************************
     public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem() {
         return adminSelectedMenuItem;
     }
 
-
+    //************************************************************************************************************
     private void createStage(FXMLLoader loader) {
         Scene scene = null;
         try {

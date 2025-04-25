@@ -1,6 +1,7 @@
 .flights_view{
-    -fx-background-color: rgba(255, 255, 255, 0.5);
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 4);
+    -fx-background-color: #EEE;
+    /*-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 4);*/
+    -fx-border-color: transparent;
 
 }
 .scroll-bar:vertical{
@@ -12,25 +13,11 @@
     -fx-pref-width: 0;
     -fx-background-radius: 8;
 }
-.title_pane{
-    -fx-background-color: #588b8b;
-    -fx-background-radius: 0 0 25 25;
-    -fx-pref-height: 55;
-    -fx-pref-width: 300;
-    -fx-padding:15;
-    -fx-alignment: center;
-    -fx-text-fill: #ffd5c2;
-    -fx-font-family: "Calibri Light";
-    -fx-font-weight: bold;
 
-}
 
-.title_pane FontAwesomeIconView{
-    -fx-fill: #ffd5c2;
-}
 
 .search_form {
-    -fx-background-color: rgba(255, 255, 255, 0.5);
+    -fx-background-color: white;
     -fx-background-radius: 25;
     -fx-font-family: "Calibri Light";
     -fx-font-size: 1.5em;
@@ -74,12 +61,54 @@
 }
 .search_form ComboBox {
     -fx-background-color: rgba(255, 255, 255, 0.8);
-    -fx-border-color: #588b8b;
-    -fx-border-radius: 15;
-    -fx-background-radius: 15;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5 10 5 10;
     -fx-text-fill: #588b8b;
     -fx-font-family: "Calibri Light";
     -fx-font-size: 1.5em;
+}
+.combo-box:hover {
+    -fx-border-color: #366666;
+    -fx-cursor: hand;
+}
+
+.combo-box:focused {
+    -fx-border-color: #366666;
+    -fx-background-color: #f4fefc;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: #588b8b;
+    -fx-background-radius: 0 10 10 0;
+}
+
+.combo-box .arrow-button:hover {
+    -fx-background-color: #366666;
+}
+
+.combo-box .arrow {
+    -fx-shape: "M0,0 L4,4 L8,0 Z";
+    -fx-background-color: #ffd5c2;
+}
+
+.combo-box .list-cell {
+    -fx-padding: 8 10;
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #588b8b;
+    -fx-font-size: 1.05em;
+    -fx-pref-width: 190;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: #EEEEEE;
+    -fx-text-fill: #366666;
+}
+
+.combo-box .list-cell:selected {
+    -fx-background-color: #DDEEEE;
+    -fx-text-fill: #366666;
 }
 .list-view{
     -fx-background-color: transparent;

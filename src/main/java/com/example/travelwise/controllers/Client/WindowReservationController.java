@@ -1,87 +1,138 @@
 package com.example.travelwise.controllers.Client;
 
 import com.example.travelwise.models.FlightModel;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 public class WindowReservationController implements Initializable {
 
-    @javafx.fxml.FXML
-    private Button cancel_btn;
-    @javafx.fxml.FXML
+    @FXML private Button cancel_btn;
+    @FXML
     private Button confirm_btn;
-    @javafx.fxml.FXML
-    private TextField num_field;
-    @javafx.fxml.FXML
-    private TextField id_field;
-    @javafx.fxml.FXML
-    private Spinner<Integer> passenger_number;
-    @javafx.fxml.FXML
-    private TextField dest_field;
-    @javafx.fxml.FXML
-    private TextField status_field;
-    @javafx.fxml.FXML
-    private TextField origin_field;
-    @javafx.fxml.FXML
-    private TextField depart_field;
-    @javafx.fxml.FXML
-    private ComboBox<String> class_combo;
-    @javafx.fxml.FXML
-    private TextField auto_price;
+    @FXML private TextField num_field;
+    @FXML private TextField id_field;
+    @FXML private TextField dest_field;
+    @FXML private TextField status_field;
+    @FXML private TextField origin_field;
+    @FXML private TextField depart_field;
+
 
     private FlightModel selectedFlight;
+    @FXML
+    private Spinner<Integer> passanger_number;
+    @FXML
+    private ComboBox<String> classcombo;
+    @FXML
+    private TextField autoprice;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        class_combo.getItems().addAll("Economy", "Business", "First Class");
-        class_combo.setValue("Economy");
+        if (classcombo != null) {
+            classcombo.getItems().addAll("Economy", "Business", "First Class");
+            classcombo.setValue("Economy");
+        } else {
+            System.err.println("Warning: class_combo is null!");
+        }
 
-       // class_combo.setOnAction(event -> updateTotalPrice());
-       // passenger_number.valueProperty().addListener((observable, oldValue, newValue) -> updateTotalPrice());
+        cancel_btn.setOnAction(event -> {
+            ((Stage) cancel_btn.getScene().getWindow()).close();
+        });
 
-
+        confirm_btn.setOnAction(event -> {
+            confirmReservation();
+            ((Stage) confirm_btn.getScene().getWindow()).close();
+        });
     }
+
     public void setSelectedFlight(FlightModel flight) {
         this.selectedFlight = flight;
         fillFormWithFlightData();
     }
+
     private void fillFormWithFlightData() {
         if (selectedFlight != null) {
-            num_field.setText(selectedFlight.getFlightNumber());
-            id_field.setText(String.valueOf(selectedFlight.getFlight_id()));
-            origin_field.setText(selectedFlight.getOrigin());
-            dest_field.setText(selectedFlight.getDestination());
-            status_field.setText(selectedFlight.getStatus());
-            depart_field.setText(String.valueOf(selectedFlight.getDepartureDate()));
-            auto_price.setText(String.valueOf(selectedFlight.getPrice()));
-            passenger_number.getValueFactory().setValue(1);
-            ((SpinnerValueFactory.IntegerSpinnerValueFactory) passenger_number.getValueFactory())
-                    .setMax(selectedFlight.getCapacity());
+            try {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-            passenger_number.valueProperty().addListener((obs, oldVal, newVal) -> updateTotalPrice());
-            class_combo.valueProperty().addListener((obs, oldVal, newVal) -> updateTotalPrice());
-            updateTotalPrice();
+                num_field.setText(selectedFlight.getFlightNumber());
+                id_field.setText(String.valueOf(selectedFlight.getFlight_id()));
+                origin_field.setText(selectedFlight.getOrigin());
+                dest_field.setText(selectedFlight.getDestination());
+                status_field.setText(selectedFlight.getStatus());
+                depart_field.setText(dateFormat.format(selectedFlight.getDepartureDate()));
+                autoprice.setText(String.format("€%.2f", selectedFlight.getPrice()));
 
+                SpinnerValueFactory.IntegerSpinnerValueFactory valueFactory =
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(
+                                1,
+                                selectedFlight.getCapacity(),
+                                1);
+                passanger_number.setValueFactory(valueFactory);
+
+                passanger_number.valueProperty().addListener((obs, oldVal, newVal) -> updateTotalPrice());
+                classcombo.valueProperty().addListener((obs, oldVal, newVal) -> updateTotalPrice());
+
+                updateTotalPrice();
+            } catch (Exception e) {
+                showErrorAlert("Error", "Failed to load flight data");
+            }
         }
     }
+
     private void updateTotalPrice() {
-        if (selectedFlight == null) {
-            return;
-        } else {
+        if (selectedFlight != null) {
+            try {
+                String classType = classcombo.getValue();
+                int passengerCount = passanger_number.getValue();
+                double basePrice = selectedFlight.getPrice();
 
-            String classType = class_combo.getValue();
-            int passangerNumber = passenger_number.getValue();
-            double price = selectedFlight.getPrice();
+                double multiplier = switch (classType) {
+                    case "Business" -> 1.5;
+                    case "First Class" -> 2.0;
+                    default -> 1.0;
+                };
 
-            double miltiplier = switch (classType) {
-                case "Business" -> 1.5;
-                case "First Class" -> 2;
-                default -> 1;
-            };
-            double totalPrice = price * miltiplier * passangerNumber;
-            auto_price.setText(String.format("%.2f", totalPrice));
+                double totalPrice = basePrice * multiplier * passengerCount;
+                autoprice.setText(String.format("€%.2f", totalPrice));
+            } catch (Exception e) {
+                showErrorAlert("Calculation Error", "Failed to calculate total price: " + e.getMessage());
+            }
         }
+    }
+
+    private void cancelReservation() {
+        autoprice.getScene().getWindow().hide();
+    }
+
+    private void confirmReservation() {
+        try {
+            // Add reservation logic here
+            showInformationAlert("Success", "Reservation confirmed successfully!");
+            autoprice.getScene().getWindow().hide();
+        } catch (Exception e) {
+            showErrorAlert("Reservation Error", "Failed to confirm reservation: " + e.getMessage());
+        }
+    }
+
+    private void showErrorAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void showInformationAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 
 public class WindowReservationController implements Initializable {
 
-
     @javafx.fxml.FXML
     private Button cancel_btn;
     @javafx.fxml.FXML
@@ -19,7 +18,7 @@ public class WindowReservationController implements Initializable {
     @javafx.fxml.FXML
     private TextField id_field;
     @javafx.fxml.FXML
-    private Spinner passanger_number;
+    private Spinner<Integer> passenger_number;
     @javafx.fxml.FXML
     private TextField dest_field;
     @javafx.fxml.FXML
@@ -29,17 +28,19 @@ public class WindowReservationController implements Initializable {
     @javafx.fxml.FXML
     private TextField depart_field;
     @javafx.fxml.FXML
-    private ComboBox classcombo;
+    private ComboBox<String> class_combo;
     @javafx.fxml.FXML
-    private TextField autoprice;
+    private TextField auto_price;
 
     private FlightModel selectedFlight;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        classcombo.getItems().addAll("Economy", "Business", "First Class");
-        classcombo.setValue("Economy");
+        class_combo.getItems().addAll("Economy", "Business", "First Class");
+        class_combo.setValue("Economy");
 
-        passanger_number.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100)); // 100 as a temporary max value
+       // class_combo.setOnAction(event -> updateTotalPrice());
+       // passenger_number.valueProperty().addListener((observable, oldValue, newValue) -> updateTotalPrice());
+
 
     }
     public void setSelectedFlight(FlightModel flight) {
@@ -54,8 +55,33 @@ public class WindowReservationController implements Initializable {
             dest_field.setText(selectedFlight.getDestination());
             status_field.setText(selectedFlight.getStatus());
             depart_field.setText(String.valueOf(selectedFlight.getDepartureDate()));
+            auto_price.setText(String.valueOf(selectedFlight.getPrice()));
+            passenger_number.getValueFactory().setValue(1);
+            ((SpinnerValueFactory.IntegerSpinnerValueFactory) passenger_number.getValueFactory())
+                    .setMax(selectedFlight.getCapacity());
 
+            passenger_number.valueProperty().addListener((obs, oldVal, newVal) -> updateTotalPrice());
+            class_combo.valueProperty().addListener((obs, oldVal, newVal) -> updateTotalPrice());
+            updateTotalPrice();
 
+        }
+    }
+    private void updateTotalPrice() {
+        if (selectedFlight == null) {
+            return;
+        } else {
+
+            String classType = class_combo.getValue();
+            int passangerNumber = passenger_number.getValue();
+            double price = selectedFlight.getPrice();
+
+            double miltiplier = switch (classType) {
+                case "Business" -> 1.5;
+                case "First Class" -> 2;
+                default -> 1;
+            };
+            double totalPrice = price * miltiplier * passangerNumber;
+            auto_price.setText(String.format("%.2f", totalPrice));
         }
     }
 }

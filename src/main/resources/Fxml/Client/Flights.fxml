@@ -5,9 +5,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -28,45 +27,22 @@
                   <Font size="24.0" />
                 </font>
             </Label>
-            <AnchorPane layoutX="54.0" layoutY="85.0" prefHeight="96.0" prefWidth="342.0" styleClass="search_form" AnchorPane.topAnchor="85.0">
+            <AnchorPane layoutX="54.0" layoutY="85.0" prefHeight="96.0" prefWidth="325.0" styleClass="search_form" AnchorPane.topAnchor="85.0">
                 <Label layoutX="50.0" layoutY="28.0" text="Departure: " AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0" />
                 <Label layoutX="194.0" layoutY="30.0" text="Destination: " AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="10.0" />
                 <TextField fx:id="depart_field" prefWidth="160.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0" />
                 <TextField fx:id="destin_field" layoutX="194.0" layoutY="60.0" AnchorPane.leftAnchor="180.0" AnchorPane.topAnchor="40.0" />
             </AnchorPane>
-            <AnchorPane layoutX="594.0" layoutY="85.0" prefHeight="96.0" prefWidth="232.0" styleClass="search_form">
+            <AnchorPane layoutX="594.0" layoutY="85.0" prefHeight="96.0" prefWidth="343.0" styleClass="search_form">
                 <Label layoutX="22.0" layoutY="14.0" text="Departure Date :" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0" />
                 <DatePicker fx:id="depart_date" layoutX="14.0" layoutY="56.0" prefHeight="22.0" prefWidth="178.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="45.0" />
             </AnchorPane>
             <AnchorPane layoutX="54.0" layoutY="210.0" prefHeight="68.0" prefWidth="772.0" styleClass="search_form">
                 <Label layoutX="50.0" layoutY="20.0" text="Filter By :" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="20.0" />
-                <ComboBox fx:id="combo_price" editable="true" layoutX="148.0" layoutY="15.0" prefHeight="38.0" prefWidth="194.0" promptText="Price" AnchorPane.rightAnchor="429.6">
-                    <!--<items>
-                        <FXCollections fx:factory="observableArrayList">
-                            <String fx:value="All" />
-                            <String fx:value="Under 100€" />
-                            <String fx:value="100–300€" />
-                            <String fx:value="Above 300€" />
-                        </FXCollections>
-                    </items>-->
-                </ComboBox>
+                <ComboBox fx:id="combo_price" editable="true" layoutX="148.0" layoutY="15.0" prefHeight="38.0" prefWidth="194.0" promptText="Price" AnchorPane.rightAnchor="429.6" />
                 <Button fx:id="search_btn" layoutX="504.0" layoutY="14.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="254.0" text="Search" AnchorPane.leftAnchor="504.0" AnchorPane.rightAnchor="14.0" />
             </AnchorPane>
-            <TableView fx:id="tableview_flights" layoutX="15.0" layoutY="325.0" prefHeight="314.0" prefWidth="820.0" styleClass="tableau_vols">
-              <columns>
-                  <TableColumn fx:id="airlinecol" prefWidth="75.0" text="AirLine" />
-                  <TableColumn fx:id="departurecol" prefWidth="75.0" text="Departure" />
-                  <TableColumn fx:id="departure_datecol" prefWidth="75.0" text="Departure Date" />
-                  <TableColumn fx:id="capacitycol" prefWidth="75.0" text="Capacity" />
-                  <TableColumn fx:id="pricecol" prefWidth="75.0" text="Price" />
-                  <TableColumn fx:id="selectioncol" prefWidth="75.0" text="Selection" />
-              </columns>
-                <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                </columnResizePolicy>
-            </TableView>
-            <Button fx:id="reserv_btn" layoutX="221.0" layoutY="670.0" mnemonicParsing="false" styleClass="resserv_btn" text="Reserve" />
-            <Button fx:id="pay_btn" layoutX="478.0" layoutY="670.0" mnemonicParsing="false" styleClass="pay_btn" text="Pay" />
+         <ListView fx:id="flights_listview" layoutX="25.0" layoutY="338.0" prefHeight="378.0" prefWidth="840.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
         </AnchorPane>
     </ScrollPane>
 </AnchorPane>

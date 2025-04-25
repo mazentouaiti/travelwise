@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane prefHeight="65.0" prefWidth="830.0" styleClass="cell_container" stylesheets="@../../Styles/FlightCell.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Client.FlightCellController">
+    <AnchorPane layoutX="2.0" layoutY="12.0" prefHeight="52.0" prefWidth="802.0" styleClass="container" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+        <FontAwesomeIconView glyphName="PLANE" layoutX="1.0" layoutY="28.0" size="30" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="10.0" />
+        <Label fx:id="airline_lbl" layoutX="47.0" layoutY="16.0" text="AIRLINE" AnchorPane.topAnchor="15.0" />
+        <Label fx:id="origin_lbl" layoutX="140.0" layoutY="17.0" text="FROM" AnchorPane.topAnchor="15.0" />
+        <Label fx:id="des_lbl" layoutX="221.0" layoutY="16.0" text="TO" AnchorPane.topAnchor="15.0" />
+        <Label fx:id="depart_lbl" layoutX="295.0" layoutY="17.0" text="2000-07-04" AnchorPane.topAnchor="15.0" />
+        <Line endX="-99.99998474121094" endY="18.95956039428711" layoutX="532.0" layoutY="12.0" startX="-100.0" AnchorPane.topAnchor="15.0" />
+        <Label fx:id="price_lbl" layoutX="492.0" layoutY="10.0" styleClass="price_lbl" text="PRICE" AnchorPane.topAnchor="10.0" />
+        <Label fx:id="status_lbl" layoutX="600.0" layoutY="13.0" text="STATUS" AnchorPane.topAnchor="10.0" />
+        <Button fx:id="view_btn" layoutX="725.0" layoutY="14.0" mnemonicParsing="false" text="View" AnchorPane.topAnchor="10.0" />
+    </AnchorPane>
+</AnchorPane>

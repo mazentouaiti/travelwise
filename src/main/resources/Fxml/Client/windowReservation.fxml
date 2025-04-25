@@ -34,7 +34,7 @@
       </Spinner>
       <ComboBox fx:id="classcombo" layoutX="440.0" layoutY="81.0" prefHeight="25.0" prefWidth="132.0" AnchorPane.leftAnchor="440.0" />
       <Label layoutX="315.0" layoutY="168.0" text="Price :" AnchorPane.leftAnchor="315.0" />
-      <TextField fx:id="autoprice" layoutX="440.0" layoutY="162.0" prefHeight="27.0" prefWidth="101.0" AnchorPane.leftAnchor="440.0" />
+      <TextField fx:id="autoprice" editable="false" layoutX="440.0" layoutY="162.0" prefHeight="27.0" prefWidth="101.0" AnchorPane.leftAnchor="440.0" />
       <Label layoutX="32.0" layoutY="11.0" styleClass="title" text="FLIGHT TICKET" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <graphic>
             <FontAwesomeIconView glyphName="PLANE" size="30" />

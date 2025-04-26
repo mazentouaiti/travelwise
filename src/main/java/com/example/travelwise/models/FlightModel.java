@@ -6,13 +6,13 @@ import java.sql.Date;
 
 public class FlightModel {
     private int flight_id , capacity;
-    private String airline, origin, destination, classType, status,flight_number;
+    private String airline, origin, destination, classType, status,flight_number,admin_status;
     private Date departureDate, returnDate;
     private double price;
 
 
     public FlightModel(int flight_id, String airline, String origin, String destination, String classType, String status, String flight_number,
-                       java.sql.Date departureDate, java.sql.Date returnDate, double price, int capacity) {
+                       java.sql.Date departureDate, java.sql.Date returnDate, double price, int capacity, String admin_status) {
         this.flight_id = flight_id;
         this.flight_number = flight_number;
         this.airline = airline;
@@ -24,11 +24,10 @@ public class FlightModel {
         this.returnDate = returnDate;
         this.price = price;
         this.capacity = capacity;
-
-
+        this.admin_status = admin_status;
     }
     public FlightModel(String airline, String origin, String destination, String classType, String status,String flight_number,
-                       java.sql.Date departureDate, java.sql.Date returnDate, double price, int capacity) {
+                       java.sql.Date departureDate, java.sql.Date returnDate, double price, int capacity, String admin_status) {
         this.airline = airline;
         this.origin = origin;
         this.destination = destination;
@@ -39,7 +38,7 @@ public class FlightModel {
         this.price = price;
         this.flight_number = flight_number;
         this.capacity = capacity;
-
+        this.admin_status = admin_status;
     }
 
     public FlightModel() {}
@@ -102,9 +101,9 @@ public class FlightModel {
     public double getPrice() {
         return price;
     }
-    public void setPrice(double price) {
-        this.price = price;
-    }
+    public void setPrice(double price) {this.price = price;}
+    public String getAdminStatus() {return admin_status;}
+    public void setAdminStatus(String admin_status) {this.admin_status = admin_status;}
 
     @Override
     public String toString() {
@@ -120,6 +119,7 @@ public class FlightModel {
                 ", Return Date=" + returnDate +
                 ", Price=" + price +
                 ", Capacity=" + capacity +
+                ", Admin Status='" + admin_status + '\'' +
                 '}';
     }
 

@@ -1,7 +1,7 @@
 .cell_container{
     -fx-background-color: #FFF;
     -fx-background-radius: 10;
-    -fx-border-radius: 10;
+    /*-fx-border-radius: 10;*/
     -fx-effect: dropshadow(three-pass-box,#dddddd,5,0,0,7);
     -fx-alignment: left;
 }
@@ -34,7 +34,6 @@
 }
 
 .container Button{
-    -fx-pref-width: 60;
     -fx-background-radius: 25;
     -fx-background-color: #588b8b;
     -fx-border-radius: 25;

@@ -58,6 +58,12 @@ public class WindowReservationController implements Initializable {
     private void fillFormWithFlightData() {
         if (selectedFlight != null) {
             try {
+                // First verify flight is approved
+                if (!"approved".equals(selectedFlight.getAdminStatus())) {
+                    showErrorAlert("Unavailable", "This flight is not available for booking");
+                    ((Stage) cancel_btn.getScene().getWindow()).close();
+                    return;
+                }
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
                 num_field.setText(selectedFlight.getFlightNumber());
@@ -112,6 +118,20 @@ public class WindowReservationController implements Initializable {
 
     private void confirmReservation() {
         try {
+            // Check if flight is still approved
+            if (selectedFlight == null || !"approved".equals(selectedFlight.getAdminStatus())) {
+                showErrorAlert("Reservation Error", "This flight is no longer available for booking");
+                return;
+            }
+
+            // Check capacity
+            int passengers = passanger_number.getValue();
+            if (passengers > selectedFlight.getCapacity()) {
+                showErrorAlert("Capacity Exceeded",
+                        "Only " + selectedFlight.getCapacity() + " seats available");
+                return;
+            }
+
             // Add reservation logic here
             showInformationAlert("Success", "Reservation confirmed successfully!");
             autoprice.getScene().getWindow().hide();

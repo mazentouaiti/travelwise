@@ -9,6 +9,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.web.WebView?>
 
 <AnchorPane styleClass="flights_view" stylesheets="@../../Styles/Flights.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Client.FlightsController">
      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="742.0" prefWidth="850.0" styleClass="flights_view">
@@ -21,7 +22,7 @@
          <FontAwesomeIconView glyphName="MAP_MARKER" layoutX="130.0" layoutY="64.0" size="20" />
          <FontAwesomeIconView glyphName="GLOBE" layoutX="284.0" layoutY="65.0" size="20" />
          </AnchorPane>
-      <ListView fx:id="flights_listview" layoutX="25.0" layoutY="338.0" prefHeight="370.0" prefWidth="840.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <ListView fx:id="flights_listview" layoutX="25.0" layoutY="338.0" prefHeight="365.0" prefWidth="560.0" AnchorPane.leftAnchor="0.0" />
       <ImageView fitHeight="214.0" fitWidth="342.0" layoutX="107.0" layoutY="132.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/pngwing.com.png" />

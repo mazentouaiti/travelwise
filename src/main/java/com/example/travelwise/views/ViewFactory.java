@@ -1,6 +1,7 @@
 package com.example.travelwise.views;
 
 import com.example.travelwise.controllers.Admin.AdminController;
+import com.example.travelwise.controllers.Agence.AgencyController;
 import com.example.travelwise.controllers.Client.ClientController;
 import com.example.travelwise.controllers.Client.WindowReservationController;
 import com.example.travelwise.models.FlightModel;
@@ -11,8 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class ViewFactory {
     private AccountType loginAccountType;
@@ -28,11 +27,15 @@ public class ViewFactory {
     //AdminViews
     private final ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
     private AnchorPane FlightAdminView;
-
+    //AgencyViews
+    private final ObjectProperty<AgencyMenuOptions> agencySelectedMenuItem;
+    private AnchorPane agencyFlightsView;
+    //viewFactory
     public ViewFactory() {
         this.loginAccountType = AccountType.PASSENGER;
         this.adminSelectedMenuItem = new SimpleObjectProperty<>();
         this.clientSelectedMenuItem = new SimpleObjectProperty<>();
+        this.agencySelectedMenuItem = new SimpleObjectProperty<>();
     }
 
     public AccountType getLoginAccountType() {
@@ -129,12 +132,33 @@ public class ViewFactory {
         loader.setController(adminController);
         createStage(loader);
     }
-//********************************************************************************************
+    //********************************************************************************************
     public ObjectProperty<AdminMenuOptions> getAdminSelectedMenuItem() {
         return adminSelectedMenuItem;
     }
 
     //************************************************************************************************************
+    public ObjectProperty<AgencyMenuOptions> getAgencySelectedMenuItem() { return agencySelectedMenuItem; }
+    public AnchorPane getAgencyFlightsView() {
+        if (agencyFlightsView == null) {
+            try {
+                agencyFlightsView = new FXMLLoader(getClass().getResource("/Fxml/Agences/FlightAgency.fxml")).load();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return agencyFlightsView;
+    }
+
+    //Agency window
+    public void showAgencyWindow(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Agences/Agency.fxml"));
+        AgencyController agencyController = new AgencyController();
+        loader.setController(agencyController);
+        createStage(loader);
+    }
+
+    // ************************************************************************************************************
     private void createStage(FXMLLoader loader) {
         Scene scene = null;
         try {

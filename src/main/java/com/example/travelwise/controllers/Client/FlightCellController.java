@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -76,17 +77,34 @@ public class FlightCellController implements Initializable {
     public void setFlight(FlightModel flightModel) {
         this.flightModel = flightModel;
         updateFlightData();
+
+        // Disable view button if flight isn't approved
+        if (flightModel != null && !"approved".equals(flightModel.getAdminStatus())) {
+            view_btn.setDisable(true);
+            view_btn.setTooltip(new Tooltip("This flight is not available for booking"));
+        } else {
+            view_btn.setDisable(false);
+            view_btn.setTooltip(null);
+        }
     }
 
     private void updateFlightData() {
         if (flightModel != null) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             des_lbl.setText(flightModel.getDestination());
             origin_lbl.setText(flightModel.getOrigin());
             price_lbl.setText(String.format("€%.2f", flightModel.getPrice()));
             status_lbl.setText(flightModel.getStatus());
             depart_lbl.setText(dateFormat.format(flightModel.getDepartureDate()));
             airline_lbl.setText(flightModel.getAirline());
+
+            // Add visual indicator for flight status
+            if (!"approved".equals(flightModel.getAdminStatus())) {
+                status_lbl.setStyle("-fx-text-fill: red;");
+                status_lbl.setText(status_lbl.getText() + " (Pending Approval)");
+            } else {
+                status_lbl.setStyle("-fx-text-fill: green;");
+            }
         }
     }
 

@@ -14,8 +14,8 @@ public class FlightServices implements Services{
     public FlightServices() {connection=DBConnection.getInstance().getConnection();}
     // ✅ CREATE
     public void addFlight(FlightModel flight) {
-        String sql = "INSERT INTO flights (flight_number, airline, origin, destination, departureDate, return_date, class_type, status, price,capacity) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+        String sql = "INSERT INTO flights (flight_number, airline, origin, destination, departureDate, return_date, class_type, status, price,capacity ,admin_status) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)";
         try {
 
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -29,7 +29,7 @@ public class FlightServices implements Services{
             ps.setString(8, flight.getStatus());
             ps.setDouble(9, flight.getPrice());
             ps.setInt(10,flight.getCapacity());
-
+            ps.setString(11, "pending");
             ps.executeUpdate();
         } catch (SQLException e){
             System.out.println(e.getMessage());
@@ -57,6 +57,7 @@ public class FlightServices implements Services{
                 f.setStatus(rs.getString("status"));
                 f.setPrice(rs.getDouble("price"));
                 f.setCapacity(rs.getInt("capacity"));
+                f.setAdminStatus(rs.getString("admin_status"));
                 flights.add(f);
             }
         } catch (SQLException e) {
@@ -103,7 +104,7 @@ public class FlightServices implements Services{
                                            Date departureDate,
                                            String priceFilter) {
         List<FlightModel> flights = new ArrayList<>();
-        StringBuilder sql = new StringBuilder("SELECT * FROM flights WHERE 1=1");
+        StringBuilder sql = new StringBuilder("SELECT * FROM flights WHERE admin_status = 'approved'");
 
         // Add conditions based on parameters
         if (departure != null) {
@@ -158,12 +159,32 @@ public class FlightServices implements Services{
                 flight.setStatus(rs.getString("status"));
                 flight.setPrice(rs.getDouble("price"));
                 flight.setCapacity(rs.getInt("capacity"));
+                flight.setAdminStatus(rs.getString("admin_status"));
                 flights.add(flight);
             }
         } catch (SQLException e) {
             System.out.println("Error searching flights: " + e.getMessage());
         }
         return flights;
+    }
+    public void approveFlight(int flightId) {
+        String sql = "UPDATE flights SET admin_status = 'approved' WHERE flight_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, flightId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error approving flight: " + e.getMessage());
+        }
+    }
+
+    public void rejectFlight(int flightId) {
+        String sql = "UPDATE flights SET admin_status = 'rejected' WHERE flight_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, flightId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error rejecting flight: " + e.getMessage());
+        }
     }
 
 }

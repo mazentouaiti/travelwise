@@ -1,4 +1,4 @@
-package com.example.travelwise.controllers.Admin;
+package com.example.travelwise.controllers.Agence;
 
 import com.example.travelwise.models.FlightModel;
 import javafx.fxml.FXML;

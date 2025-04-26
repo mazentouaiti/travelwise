@@ -2,13 +2,15 @@ package com.example.travelwise.controllers.Client;
 
 import com.example.travelwise.models.FlightModel;
 import com.example.travelwise.Services.FlightServices;
-import com.example.travelwise.models.Model;
 import com.example.travelwise.views.FlightCellFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.web.WebView;
+
 import java.net.URL;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -17,6 +19,7 @@ import java.util.ResourceBundle;
 
 public class FlightsController implements Initializable {
 
+    // UI Components
     @FXML private TextField depart_field;
     @FXML private TextField destin_field;
     @FXML private DatePicker depart_date;
@@ -24,39 +27,54 @@ public class FlightsController implements Initializable {
     @FXML private Button search_btn;
     @FXML private ListView<FlightModel> flights_listview;
 
+
+    // Business Logic Components
     private FlightServices flightServices;
     private ObservableList<FlightModel> flightsList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
+            // Initialize services
             flightServices = new FlightServices();
-            initializePriceComboBox();
-            loadAllFlights();
-            setupSearchButton();
+
+            // Setup UI components
+            initializePriceFilter();
+            initializeFlightListView();
+            setupSearchHandler();
+
+            // Load initial data
+            refreshFlightData();
         } catch (Exception e) {
-            showErrorAlert("Initialization Error", "Failed to initialize controller: " + e.getMessage());
+            showErrorAlert("Initialization Error", "Failed to initialize: " + e.getMessage());
         }
     }
 
-    private void initializePriceComboBox() {
+    private void initializePriceFilter() {
         combo_price.getItems().addAll("All", "Under 100€", "100–300€", "Above 300€");
         combo_price.setValue("All");
     }
 
-    private void loadAllFlights() {
-        try {
-            List<FlightModel> flights = flightServices.getAllFlights();
-            flightsList = FXCollections.observableArrayList(flights);
-            flights_listview.setItems(flightsList);
-            flights_listview.setCellFactory(listView -> new FlightCellFactory());
-        } catch (Exception e) {
-            showErrorAlert("Loading Error", "Failed to load flights: " + e.getMessage());
-        }
+    private void initializeFlightListView() {
+        flights_listview.setCellFactory(listView -> new FlightCellFactory());
     }
 
-    private void setupSearchButton() {
+    private void setupSearchHandler() {
         search_btn.setOnAction(event -> searchFlights());
+    }
+
+
+    private void refreshFlightData() {
+        try {
+            List<FlightModel> approvedFlights = flightServices.getAllFlights().stream()
+                    .filter(flight -> "approved".equals(flight.getAdminStatus()))
+                    .toList();
+
+            flightsList = FXCollections.observableArrayList(approvedFlights);
+            flights_listview.setItems(flightsList);
+        } catch (Exception e) {
+            showErrorAlert("Data Load Error", "Failed to load flights: " + e.getMessage());
+        }
     }
 
     private void searchFlights() {
@@ -67,14 +85,16 @@ public class FlightsController implements Initializable {
             String priceFilter = combo_price.getValue();
 
             List<FlightModel> filteredFlights = flightServices.searchFlights(
-                    departure.isEmpty() ? null : departure,
-                    destination.isEmpty() ? null : destination,
-                    departureDate != null ? Date.valueOf(departureDate) : null,
-                    priceFilter
-            );
+                            departure.isEmpty() ? null : departure,
+                            destination.isEmpty() ? null : destination,
+                            departureDate != null ? Date.valueOf(departureDate) : null,
+                            priceFilter
+                    ).stream()
+                    .filter(flight -> "approved".equals(flight.getAdminStatus()))
+                    .toList();
 
             if (filteredFlights.isEmpty()) {
-                showInformationAlert("No Results", "No flights match your search criteria");
+                showInformationAlert("No Results", "No matching flights found");
             }
 
             flightsList = FXCollections.observableArrayList(filteredFlights);

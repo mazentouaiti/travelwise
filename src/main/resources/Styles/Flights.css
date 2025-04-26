@@ -5,7 +5,11 @@
 
 }
 .scroll-bar:vertical{
-    -fx-background-color: rgb(48,58,59);
+    -fx-background-color: transparent;
+    -fx-pref-width: 0;
+}
+.scroll-bar:horizontal{
+    -fx-background-color: transparent;
     -fx-pref-width: 0;
 }
 .scroll-pane .thumb {
@@ -13,6 +17,8 @@
     -fx-pref-width: 0;
     -fx-background-radius: 8;
 }
+
+
 
 
 
@@ -117,6 +123,39 @@
 }
 .list-cell{
     -fx-background-color: transparent;
-    -fx-pref-width: 800;
+    -fx-pref-width: 530;
     -fx-padding: 10;
+}
+.list-view .scroll-bar:vertical .increment-button,
+.list-view .scroll-bar:vertical .decrement-button,
+.list-view .scroll-bar:horizontal .increment-button,
+.list-view .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: transparent;
+}
+/* The increment and decrement arrows */
+.list-view .scroll-bar .increment-arrow,
+.list-view .scroll-bar .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+/* Corner between vertical and horizontal scroll bars */
+.list-view .scroll-bar:vertical .corner,
+.list-view .scroll-bar:horizontal .corner {
+    -fx-background-color: transparent;
+}
+
+/* WebView Container */
+.web-view-container {
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 5;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 3, 0, 0, 1);
+}
+
+/* Ensure WebView fills its container */
+.web-view {
+    -fx-pref-width: 100%;
+    -fx-pref-height: 100%;
 }

@@ -11,7 +11,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #EEE;"
             stylesheets="@../../Styles/ManageFlights.css" xmlns="http://javafx.com/javafx/23.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.travelwise.controllers.Admin.ManageFlightsController">
+            fx:controller="com.example.travelwise.controllers.Agence.ManageFlightsController">
    <Button fx:id="cancel" layoutX="430.0" layoutY="339.0" mnemonicParsing="false" prefWidth="114.0" styleClass="btn"
            text="Cancel"/>
    <Button fx:id="confirm" layoutX="447.0" layoutY="270.0" mnemonicParsing="false" styleClass="btn" text="Confirm"/>

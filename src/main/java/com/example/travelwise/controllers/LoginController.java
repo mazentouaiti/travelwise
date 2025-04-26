@@ -35,6 +35,8 @@ public class LoginController implements Initializable {
             Model.getInstance().getViewFactory().showClientWindow();
         }else if (Model.getInstance().getViewFactory().getLoginAccountType()==AccountType.ADMIN) {
             Model.getInstance().getViewFactory().showAdminWindow();
+        }else if (Model.getInstance().getViewFactory().getLoginAccountType()==AccountType.AGENCY) {
+            Model.getInstance().getViewFactory().showAgencyWindow();
         }
     }
     private void onSignup() {

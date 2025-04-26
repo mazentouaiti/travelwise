@@ -5,203 +5,170 @@ import com.example.travelwise.models.FlightModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class FlightAdminController implements Initializable {
 
 
-    /*
-        public TextField id;
-        public TextField flight_number;
-        public TextField origin;
-        public TextField destination;
-        public TextField price;
-        public TextField airline;
-        public TextField status;
-        public TextField aircraft;
-        public TextField capacity;
-        public TextField baggage;
-        public Button add_btn;
-        public Button update_btn;
-        public Button delete_btn;
-        public DatePicker depar;
-        public DatePicker arriv;
-        public TableColumn id_col;
-        public TableColumn numbcol;
-        public TableColumn orgincol;
-        public TableColumn desticol;
-        public TableColumn statcol;
-        public TableColumn airlcol;
-        public TableColumn aircrcol;
-        public TableColumn capacol;
-        public TableColumn baggcol;
-        public TableColumn pricecol;
-        public TableColumn deparcol;
-        public TableColumn arrivcol;
-        public TableView table_flight;
-    */
-    @FXML private TextField id;
-    @FXML private TextField flight_number;
-    @FXML private TextField origin;
-    @FXML private TextField destination;
-    @FXML private TextField price;
-    @FXML private TextField airline;
-    @FXML private ComboBox status;
-    @FXML private TextField capacity;
-    @FXML private DatePicker depar;
-    @FXML private DatePicker arriv;
-    @FXML private Button add_btn;
     @FXML private Button update_btn;
     @FXML private Button delete_btn;
     @FXML private Button create_btn;
-    @FXML private TableView<FlightModel> table_flight;
-    @FXML private TableColumn<FlightModel, Integer> id_col;
-    @FXML private TableColumn<FlightModel, String> numbcol;
-    @FXML private TableColumn<FlightModel, String> orgincol;
-    @FXML private TableColumn<FlightModel, String> desticol;
-    @FXML private TableColumn<FlightModel, String> statcol;
-    @FXML private TableColumn<FlightModel, String> airlcol;
-    @FXML private TableColumn<FlightModel, Double> pricecol;
-    @FXML private TableColumn<FlightModel, Date> deparcol;
-    @FXML private TableColumn<FlightModel, Date> arrivcol;
-    @FXML private TableColumn<FlightModel, Integer> capacol;
+    @FXML private ListView<FlightModel> listview_flights;
 
     private final FlightServices flightService = new FlightServices();
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        setupListView();
+        loadFlights();
+        setupButtonActions();
+    }
 
-    private void setupTableColumns() {
-        id_col.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("flight_id"));
-        numbcol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("flightNumber"));
-        orgincol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("origin"));
-        desticol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("destination"));
-        statcol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("status"));
-        airlcol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("airline"));
-        pricecol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("price"));
-        deparcol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("departureDate"));
-        arrivcol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("returnDate"));
-        capacol.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("capacity"));
+    private void setupListView() {
+        listview_flights.setCellFactory(param -> new ListCell<FlightModel>() {
+            private FXMLLoader loader;
+            private AnchorPane cell;
+            private FlightAdminCellController controller;
+
+            {
+                try {
+                    loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/FlightAdminCell.fxml"));
+                    cell = loader.load();
+                    controller = loader.getController();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    setText("Error loading cell template");
+                }
+            }
+
+            @Override
+            protected void updateItem(FlightModel flight, boolean empty) {
+                super.updateItem(flight, empty);
+                if (empty || flight == null) {
+                    setText(null);
+                    setGraphic(null);
+                } else {
+                    controller.setFlightData(flight);
+                    setGraphic(cell);
+                }
+            }
+        });
+    }
+
+    private void setupButtonActions() {
+        create_btn.setOnAction(event -> createFlight());
+        update_btn.setOnAction(event -> updateFlight());
+        delete_btn.setOnAction(event -> deleteFlight());
     }
 
     @FXML
     public void loadFlights() {
         List<FlightModel> flightList = flightService.getAllFlights();
         ObservableList<FlightModel> observableList = FXCollections.observableArrayList(flightList);
-        table_flight.setItems(observableList);
+        listview_flights.setItems(observableList);
     }
 
     @FXML
-    public void createFlight() {
-        id.setDisable(true);
-    }
-    @FXML
-    public void addFlight() {
-        FlightModel f = new FlightModel();
-        //id.setText(String.valueOf(f.getFlight_id()));
-        f.setFlightNumber(flight_number.getText());
-        f.setOrigin(origin.getText());
-        f.setDestination(destination.getText());
-        f.setAirline(airline.getText());
-        f.setStatus((String) status.getValue());
-        f.setPrice(Double.parseDouble(price.getText()));
-        f.setDepartureDate(Date.valueOf(depar.getValue()));
-        f.setReturnDate(Date.valueOf(arriv.getValue()));
-        f.setCapacity(Integer.parseInt(capacity.getText()));
-        f.setClassType("Economy"); // or let user choose from dropdown
+    private void createFlight() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/ManageFlights.fxml"));
+            AnchorPane root = loader.load();
 
-        flightService.addFlight(f);
-        loadFlights();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Add Flight");
-        alert.setHeaderText(null);
-        alert.setContentText("Flight added");
-        alert.show();
-        clearFields();
-    }
+            ManageFlightsController controller = loader.getController();
+            controller.setMode(true); // Create mode
 
-    @FXML
-    public void updateFlight() {
-        FlightModel f = new FlightModel();
-        f.setFlight_id(Integer.parseInt(id.getText()));
-        id.setDisable(true);
-        f.setFlightNumber(flight_number.getText());
-        f.setOrigin(origin.getText());
-        f.setDestination(destination.getText());
-        f.setAirline(airline.getText());
-        f.setStatus((String) status.getValue());
-        f.setPrice(Double.parseDouble(price.getText()));
-        f.setDepartureDate(Date.valueOf(depar.getValue()));
-        f.setReturnDate(Date.valueOf(arriv.getValue()));
-        f.setCapacity(Integer.parseInt(capacity.getText()));
-        f.setClassType("Economy");
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Create New Flight");
+            stage.showAndWait();
 
-        flightService.updateFlight(f);
-        loadFlights();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Update Flight");
-        alert.setHeaderText(null);
-        alert.setContentText("Flight updated");
-        alert.show();
-        clearFields();
-    }
-
-    @FXML
-    public void deleteFlight() {
-        int flightId = Integer.parseInt(id.getText());
-        flightService.deleteFlight(flightId);
-        loadFlights();
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Delete Flight");
-        alert.setHeaderText(null);
-        alert.setContentText("Flight deleted");
-        alert.show();
-        clearFields();
-    }
-
-    private void clearFields() {
-        id.clear();
-        flight_number.clear();
-        origin.clear();
-        destination.clear();
-        airline.clear();
-        status.setItems(null);
-        price.clear();
-        depar.setValue(null);
-        arriv.setValue(null);
-        capacity.clear();
-    }
-
-    private void populateFormWithFlight(FlightModel flight) {
-        id.setText(String.valueOf(flight.getFlight_id()));
-        flight_number.setText(flight.getFlightNumber());
-        origin.setText(flight.getOrigin());
-        destination.setText(flight.getDestination());
-        airline.setText(flight.getAirline());
-        price.setText(String.valueOf(flight.getPrice()));
-        status.setValue(flight.getStatus()); // ✅ ComboBox
-        depar.setValue(flight.getDepartureDate().toLocalDate());
-        arriv.setValue(flight.getReturnDate().toLocalDate());
-        capacity.setText(String.valueOf(flight.getCapacity()));
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        status.setItems(FXCollections.observableArrayList("Scheduled", "Delayed", "Cancelled", "Boarding", "Landed"));
-        setupTableColumns();  // Don't forget this!
-        loadFlights();        // Load data on startup
-        table_flight.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                id.setDisable(true);
-                populateFormWithFlight(newSelection);
+            // After the stage is closed, check if flight was created
+            FlightModel newFlight = controller.getFlightData();
+            if (newFlight != null) {
+                flightService.addFlight(newFlight);
+                loadFlights();
+                showAlert("Success", "Flight created successfully!");
             }
-        });
-
-
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert("Error", "Could not open flight creation window");
+        }
     }
 
+
+
+    @FXML
+    private void updateFlight() {
+        FlightModel selectedFlight = listview_flights.getSelectionModel().getSelectedItem();
+        if (selectedFlight != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Admin/ManageFlights.fxml"));
+                AnchorPane root = loader.load();
+
+                ManageFlightsController controller = loader.getController();
+                controller.setMode(false); // Update mode
+                controller.populateFields(selectedFlight);
+
+                Stage stage = new Stage();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Update Flight");
+                stage.showAndWait();
+
+                // After the stage is closed, check if flight was updated
+                FlightModel updatedFlight = controller.getFlightData();
+                if (updatedFlight != null) {
+                    updatedFlight.setFlight_id(selectedFlight.getFlight_id());
+                    flightService.updateFlight(updatedFlight);
+                    loadFlights();
+                    showAlert("Success", "Flight updated successfully!");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                showAlert("Error", "Could not open flight update window");
+            }
+        } else {
+            showAlert("No Selection", "Please select a flight to update");
+        }
+    }
+
+    @FXML
+    private void deleteFlight() {
+        FlightModel selectedFlight = listview_flights.getSelectionModel().getSelectedItem();
+        if (selectedFlight != null) {
+            Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+            confirmation.setTitle("Confirm Deletion");
+            confirmation.setHeaderText("Delete Flight");
+            confirmation.setContentText("Are you sure you want to delete this flight?");
+
+            Optional<ButtonType> result = confirmation.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                flightService.deleteFlight(selectedFlight.getFlight_id());
+                loadFlights();
+                showAlert("Success", "Flight deleted successfully!");
+            }
+        } else {
+            showAlert("No Selection", "Please select a flight to delete");
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 }

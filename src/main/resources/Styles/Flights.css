@@ -23,6 +23,7 @@
     -fx-font-size: 1.5em;
     -fx-font-weight: bold;
     -fx-alignment: center_left;
+    -fx-effect: dropshadow(three-pass-box,#AAAAAA,10,0,0,10);
 
 }
 .search_form TextField{

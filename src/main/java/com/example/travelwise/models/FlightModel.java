@@ -1,7 +1,7 @@
 package com.example.travelwise.models;
 
 import java.sql.Date;
-
+import java.time.LocalDate;
 
 
 public class FlightModel {
@@ -104,6 +104,27 @@ public class FlightModel {
     public void setPrice(double price) {this.price = price;}
     public String getAdminStatus() {return admin_status;}
     public void setAdminStatus(String admin_status) {this.admin_status = admin_status;}
+
+
+    public String getCalculatedStatus() {
+        // Keep manually set statuses that shouldn't auto-update
+        if (this.status.equalsIgnoreCase("Cancelled") ||
+                this.status.equalsIgnoreCase("Boarding") ||
+                this.status.equalsIgnoreCase("Landed")) {
+            return this.status;
+        }
+
+        LocalDate today = LocalDate.now();
+        LocalDate returnDate = this.returnDate.toLocalDate();
+
+        if (returnDate.isBefore(today)) {
+            return "Landed";
+        } else if (returnDate.isEqual(today)) {
+            return "Boarding"; // or "Delayed" if you prefer
+        } else {
+            return "Scheduled";
+        }
+    }
 
     @Override
     public String toString() {

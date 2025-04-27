@@ -3,6 +3,7 @@ package com.example.travelwise.controllers.Client;
 import com.example.travelwise.models.FlightModel;
 import com.example.travelwise.Services.FlightServices;
 import com.example.travelwise.views.FlightCellFactory;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,6 +17,9 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class FlightsController implements Initializable {
 
@@ -31,6 +35,7 @@ public class FlightsController implements Initializable {
     // Business Logic Components
     private FlightServices flightServices;
     private ObservableList<FlightModel> flightsList;
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -45,9 +50,23 @@ public class FlightsController implements Initializable {
 
             // Load initial data
             refreshFlightData();
+            startStatusUpdateScheduler();
         } catch (Exception e) {
             showErrorAlert("Initialization Error", "Failed to initialize: " + e.getMessage());
         }
+    }
+
+    private void startStatusUpdateScheduler() {
+        scheduler.scheduleAtFixedRate(() -> {
+            Platform.runLater(() -> {
+                try {
+                    flightServices.updateAllFlightStatuses();
+                    refreshFlightData(); // Refresh the view
+                } catch (Exception e) {
+                    System.err.println("Status update failed: " + e.getMessage());
+                }
+            });
+        }, 0, 1, TimeUnit.HOURS); // Check every hour
     }
 
     private void initializePriceFilter() {

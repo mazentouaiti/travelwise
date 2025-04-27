@@ -186,5 +186,47 @@ public class FlightServices implements Services{
             System.out.println("Error rejecting flight: " + e.getMessage());
         }
     }
+    public void updateAllFlightStatuses() {
+        String selectSql = "SELECT * FROM flights";
+        String updateSql = "UPDATE flights SET status = ? WHERE flight_id = ?";
+
+        try (Statement st = connection.createStatement();
+             ResultSet rs = st.executeQuery(selectSql);
+             PreparedStatement ps = connection.prepareStatement(updateSql)) {
+
+            while (rs.next()) {
+                FlightModel flight = extractFlightFromResultSet(rs);
+                String currentStatus = flight.getStatus();
+                String calculatedStatus = flight.getCalculatedStatus();
+
+                // Only update if status should change
+                if (!currentStatus.equals(calculatedStatus) &&
+                        !currentStatus.equals("Cancelled")) { // Never auto-update cancelled flights
+                    ps.setString(1, calculatedStatus);
+                    ps.setInt(2, flight.getFlight_id());
+                    ps.addBatch();
+                }
+            }
+            ps.executeBatch();
+        } catch (SQLException e) {
+            System.out.println("Error updating flight statuses: " + e.getMessage());
+        }
+    }
+    private FlightModel extractFlightFromResultSet(ResultSet rs) throws SQLException {
+        FlightModel flight = new FlightModel();
+        flight.setFlight_id(rs.getInt("flight_id"));
+        flight.setFlightNumber(rs.getString("flight_number"));
+        flight.setAirline(rs.getString("airline"));
+        flight.setOrigin(rs.getString("origin"));
+        flight.setDestination(rs.getString("destination"));
+        flight.setDepartureDate(rs.getDate("departureDate"));
+        flight.setReturnDate(rs.getDate("return_date"));
+        flight.setClassType(rs.getString("class_type"));
+        flight.setStatus(rs.getString("status"));
+        flight.setPrice(rs.getDouble("price"));
+        flight.setCapacity(rs.getInt("capacity"));
+        flight.setAdminStatus(rs.getString("admin_status"));
+        return flight;
+    }
 
 }

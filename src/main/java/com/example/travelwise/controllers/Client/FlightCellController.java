@@ -105,6 +105,25 @@ public class FlightCellController implements Initializable {
             } else {
                 status_lbl.setStyle("-fx-text-fill: green;");
             }
+            switch (flightModel.getStatus().toLowerCase()) {
+                case "landed":
+                    status_lbl.setStyle("-fx-text-fill: green; -fx-font-weight: bold;");
+                    break;
+                case "boarding":
+                    status_lbl.setStyle("-fx-text-fill: orange; -fx-font-weight: bold;");
+                    break;
+                case "delayed":
+                    status_lbl.setStyle("-fx-text-fill: #FF5733; -fx-font-style: italic;");
+                    break;
+                case "cancelled":
+                    status_lbl.setStyle("-fx-text-fill: red; -fx-strikethrough: true;");
+                    break;
+                case "scheduled":
+                    status_lbl.setStyle("-fx-text-fill: blue;");
+                    break;
+                default:
+                    status_lbl.setStyle("");
+            }
         }
     }
 

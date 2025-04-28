@@ -267,7 +267,7 @@ public class ClientAcc implements Initializable {
     private void openHotelInfo(Hebergement hebergement) {
         try {
             // Charger le fichier FXML de la scène hotel_info
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/hotel_info_client.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/hotel_info_client.fxml"));
             Parent root = loader.load();
 
             // Récupérer le contrôleur de hotel_info
@@ -293,7 +293,7 @@ public class ClientAcc implements Initializable {
     private void openReservation(Hebergement hebergement, ActionEvent event) {
         try {
             // Charger le fichier FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/reservationclient.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/reservationclient.fxml"));
             Parent root = loader.load();
 
             // Récupérer le stage de la scène actuelle

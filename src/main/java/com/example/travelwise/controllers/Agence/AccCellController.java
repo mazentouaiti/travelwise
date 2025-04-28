@@ -1,7 +1,7 @@
 package com.example.travelwise.controllers.Agence;
 
 import com.example.travelwise.models.Hebergement;
-import com.example.travelwise.services.ServiceHebergement;
+import com.example.travelwise.Services.ServiceHebergement;
 import com.example.travelwise.views.AccCellFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

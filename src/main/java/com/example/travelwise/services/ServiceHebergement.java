@@ -1,4 +1,4 @@
-package com.example.travelwise.services;
+package com.example.travelwise.Services;
 
 
 import com.example.travelwise.models.Hebergement;

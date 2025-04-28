@@ -4,7 +4,7 @@ import com.example.travelwise.controllers.Admin.AccCellAdmin;
 import com.example.travelwise.controllers.Agence.AccCellController;
 import com.example.travelwise.controllers.Agence.AccController;
 import com.example.travelwise.models.Hebergement;
-import com.example.travelwise.services.ServiceHebergement;
+import com.example.travelwise.Services.ServiceHebergement;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;

@@ -1,7 +1,7 @@
 package com.example.travelwise.tests;
 
 import com.example.travelwise.models.Hebergement;
-import com.example.travelwise.services.ServiceHebergement;
+import com.example.travelwise.Services.ServiceHebergement;
 
 public class TestModification {
     public static void main(String[] args) {

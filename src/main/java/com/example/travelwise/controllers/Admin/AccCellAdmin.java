@@ -1,7 +1,7 @@
 package com.example.travelwise.controllers.Admin;
 
 import com.example.travelwise.models.Hebergement;
-import com.example.travelwise.services.ServiceHebergement;
+import com.example.travelwise.Services.ServiceHebergement;
 import com.example.travelwise.utils.DBConnection;
 import com.example.travelwise.views.AccCellAdminFactory;
 import javafx.collections.FXCollections;

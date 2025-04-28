@@ -2,7 +2,7 @@ package com.example.travelwise.tests;
 
 
 import com.example.travelwise.models.Hebergement;
-import com.example.travelwise.services.ServiceHebergement;
+import com.example.travelwise.Services.ServiceHebergement;
 
 import java.util.List;
 

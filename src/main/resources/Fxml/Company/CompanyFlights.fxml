@@ -10,7 +10,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane styleClass="flights_view" stylesheets="@../../Styles/Flights.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Client.FlightsController">
+<AnchorPane styleClass="flights_view" stylesheets="@../../Styles/Flights.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Company.CompanyFlightsController">
      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="742.0" prefWidth="850.0" styleClass="flights_view">
          <AnchorPane layoutX="54.0" layoutY="35.199999999999996" prefHeight="214.0" prefWidth="772.0" styleClass="search_form" AnchorPane.topAnchor="34.0">
              <TextField fx:id="depart_field" prefWidth="160.0" promptText="From" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="40.0" />

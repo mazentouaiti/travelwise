@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
@@ -8,13 +7,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane prefHeight="750.0" prefWidth="1000.0" styleClass="flight_view" stylesheets="@../../Styles/FlightAdmin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Admin.FlightAdminController">
-   <AnchorPane layoutX="68.0" layoutY="15.0" prefHeight="224.0" prefWidth="846.0" styleClass="top_view" AnchorPane.topAnchor="0.0">
-      <ImageView fitHeight="204.0" fitWidth="477.0" layoutX="-27.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../images/pngwing.com.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="463.0" layoutY="71.0" text="Welcome To Space ADMIN" />
+   <AnchorPane layoutX="277.0" layoutY="65.0" prefHeight="151.0" prefWidth="556.0" styleClass="top_view" AnchorPane.topAnchor="65.0">
+      <Label layoutX="284.0" layoutY="62.0" text="Welcome To Space ADMIN" />
    </AnchorPane>
    <ListView fx:id="listview_flights" layoutX="267.0" layoutY="208.0" prefHeight="500.0" prefWidth="1000.0" styleClass="listView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+   <ImageView fitHeight="399.0" fitWidth="610.0" layoutX="-22.0" layoutY="-59.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../../images/planeAdmin.png" />
+      </image>
+   </ImageView>
 </AnchorPane>

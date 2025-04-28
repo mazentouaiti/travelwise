@@ -2,7 +2,7 @@ package com.example.travelwise.models;
 
 
 public class Hebergement {
-    private int id;
+    private int acc_id;
     private String name;
     private String type;
     private String city;
@@ -16,10 +16,11 @@ public class Hebergement {
     private String options;
     private int rating;
     private int capacity;
+    private String status;
 
     public Hebergement(String name, String type, String city, String address, String country,
                        double pricePerNight, boolean disponibility, String photo, String album,
-                       String description, String options, int rating, int capacity) {
+                       String description, String options, int rating, int capacity,String status) {
         this.name = name;
         this.type = type;
         this.city = city;
@@ -33,19 +34,21 @@ public class Hebergement {
         this.options = options;
         this.rating = rating;
         this.capacity = capacity;
+        this.status=status;
     }
 
-    public Hebergement(int id, String name, String type, String city, String address, String country,
+    public Hebergement(int acc_id, String name, String type, String city, String address, String country,
                        double pricePerNight, boolean disponibility, String photo, String album,
-                       String description, String options, int rating, int capacity) {
-        this(name, type, city, address, country, pricePerNight, disponibility, photo, album, description, options, rating, capacity);
-        this.id = id;
+                       String description, String options, int rating, int capacity,String status) {
+        this(name, type, city, address, country, pricePerNight, disponibility, photo, album, description, options, rating, capacity,status);
+        this.acc_id = acc_id;
     }
 
 
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+
+    public int getId() { return acc_id; }
+    public void setId(int acc_id) { this.acc_id = acc_id; }
 
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
@@ -65,7 +68,9 @@ public class Hebergement {
     public double getPricePerNight() { return pricePerNight; }
     public void setPricePerNight(double pricePerNight) { this.pricePerNight = pricePerNight; }
 
-    public boolean isDisponibility() { return disponibility; }
+    public boolean isDisponibility() {
+        return capacity != 0;
+    }
     public void setDisponibility(boolean disponibility) { this.disponibility = disponibility; }
 
     public String getPhoto() { return photo; }
@@ -85,11 +90,14 @@ public class Hebergement {
 
     public int getCapacity() { return capacity; }
     public void setCapacity(int capacity) { this.capacity = capacity; }
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
+
 
     @Override
     public String toString() {
         return "Hebergement{" +
-                "id=" + id +
+                "acc_id=" + acc_id +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", city='" + city + '\'' +
@@ -103,6 +111,8 @@ public class Hebergement {
                 ", options='" + options + '\'' +
                 ", rating=" + rating +
                 ", capacity=" + capacity +
+                ", Status" + status +
+
                 '}';
     }
 

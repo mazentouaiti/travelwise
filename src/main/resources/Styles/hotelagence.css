@@ -6,11 +6,16 @@
     -fx-padding:15;
     -fx-alignment: center;
     -fx-text-fill: #ffd5c2;
-    -fx-font-family: "Calibri Light";
-    -fx-font-weight: bold;
+    -fx-font-family: "Caliabri Light";
+
 
 }
 
+
+#anchorfilter{
+    -fx-background-color: white;
+    -fx-background-radius: 25;
+}
 .title_pane FontAwesomeIconView{
     -fx-fill: #ffd5c2;
 }
@@ -39,7 +44,7 @@
 }
 
 .reserv_zone{
-    -fx-background-color: white;
+    -fx-background-color: #EEEEEE;
     -fx-alignment: CENTER;
     -fx-spacing: 10;
 }

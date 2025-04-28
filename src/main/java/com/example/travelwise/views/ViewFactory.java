@@ -94,7 +94,7 @@ public class ViewFactory {
     public AnchorPane getHotelsView() {
         if (hotelsView == null) {
             try {
-                hotelsView = new FXMLLoader(getClass().getResource("/Fxml/Client/Hotels.fxml")).load();
+                hotelsView = new FXMLLoader(getClass().getResource("/Fxml/Client/client_acc.fxml")).load();
             }catch (Exception e){
                 e.printStackTrace();
             }

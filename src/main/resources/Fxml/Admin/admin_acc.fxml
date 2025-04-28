@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" stylesheets="@../style/accommodation.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotels.controllers.AccAdmin">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" stylesheets="@../../Styles/accommodation.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Admin.AccAdmin">
         <AnchorPane id="anchorfilter" layoutX="239.0" layoutY="163.0" prefHeight="143.0" prefWidth="678.0">
             <children>
                 <Label layoutX="94.0" layoutY="90.0" text="Type :">
@@ -42,7 +42,7 @@
             <font>
                <Font size="14.0" />
             </font></Label>
-              <Button layoutX="592.0" layoutY="60.0" mnemonicParsing="false" onAction="#onReset" prefHeight="29.0" prefWidth="36.0" styleClass="Button" stylesheets="@../style/accadmin.css">
+              <Button layoutX="592.0" layoutY="60.0" mnemonicParsing="false" onAction="#onReset" prefHeight="29.0" prefWidth="36.0" styleClass="Button" stylesheets="@../../Styles/accadmin.css">
                   <graphic>
                       <FontAwesomeIconView glyphName="UNDO" />
                   </graphic>
@@ -52,17 +52,17 @@
    <ListView fx:id="listHebergement" layoutY="370.0" prefHeight="384.0" prefWidth="1002.0" />
    <ImageView fitHeight="81.0" fitWidth="666.0" layoutX="40.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@../images/titreagence.png" />
+         <Image url="@../../images/titreagence.png" />
       </image>
    </ImageView>
    <ImageView fitHeight="145.0" fitWidth="340.0" layoutX="659.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@../images/border.png" />
+         <Image url="@../../images/border.png" />
       </image>
    </ImageView>
    <ImageView fitHeight="251.0" fitWidth="307.0" layoutX="16.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@../images/avoin.png" />
+         <Image url="@../../images/avoin.png" />
       </image>
    </ImageView>
     </AnchorPane>

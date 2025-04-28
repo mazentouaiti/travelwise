@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" stylesheets="@../style/reservationclient.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotels.controllers.ReservationCompany">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" stylesheets="@../../Styles/reservationclient.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Company.ReservationCompany">
    <children>
       <Button fx:id="btnReserve" layoutX="286.0" layoutY="698.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="79.0" styleClass="Button" text="Submit" />
       <Button fx:id="btnCancel" layoutX="459.0" layoutY="698.0" mnemonicParsing="false" onAction="#handleCancelAction" prefHeight="32.0" prefWidth="79.0" styleClass="Button" text="Cancel" />
@@ -50,12 +50,12 @@
          </font></Label>
       <ImageView fitHeight="65.0" fitWidth="706.0" layoutX="63.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/titrereservation.png" />
+            <Image url="@../../images/titrereservation.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="120.0" fitWidth="256.0" layoutX="606.0" layoutY="633.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/zinareservation.png" />
+            <Image url="@../../images/zinareservation.png" />
          </image>
       </ImageView>
       <AnchorPane id="anchorfilter" layoutX="24.0" layoutY="120.0" prefHeight="219.0" prefWidth="714.0">

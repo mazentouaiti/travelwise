@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="750.0" prefWidth="1000.0" stylesheets="@../style/accommodation.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotels.controllers.AccController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="750.0" prefWidth="1000.0" stylesheets="@../../Styles/accommodation.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Agence.AccController">
    <AnchorPane id="anchorfilter" layoutX="68.0" layoutY="128.0" prefHeight="127.0" prefWidth="670.0">
       <children>
          <TextField fx:id="countryfilteragence" layoutX="23.0" layoutY="69.0" prefHeight="26.0" prefWidth="209.0" promptText="Search By Name Or Country" />
@@ -25,17 +25,17 @@
             </font>
          </Label>
          <ComboBox id="combo" fx:id="dispocomboagence" layoutX="287.0" layoutY="69.0" maxWidth="-Infinity" prefHeight="26.0" prefWidth="171.0" promptText="   Sort By Type / Status" styleClass="combo-box" />
-         <Button layoutX="524.0" layoutY="26.0" mnemonicParsing="false" onAction="#onReset" prefHeight="29.0" prefWidth="36.0" styleClass="Button" stylesheets="@../style/accadmin.css">
+         <Button layoutX="524.0" layoutY="26.0" mnemonicParsing="false" onAction="#onReset" prefHeight="29.0" prefWidth="36.0" styleClass="Button" stylesheets="@../../Styles/accadmin.css">
             <graphic>
                <FontAwesomeIconView glyphName="UNDO" size="14" />
             </graphic>
          </Button>
          <FontAwesomeIconView glyphName="SORT" layoutX="430.0" layoutY="88.0" size="16" />
-          <Button layoutX="524.0" layoutY="66.0" mnemonicParsing="false" onAction="#switch_add" prefHeight="18.0" prefWidth="36.0" styleClass="Button" stylesheets="@../style/accadmin.css">
+          <Button layoutX="524.0" layoutY="66.0" mnemonicParsing="false" onAction="#switch_add" prefHeight="18.0" prefWidth="36.0" styleClass="Button" stylesheets="@../../Styles/accadmin.css">
               <graphic>
                   <ImageView fitHeight="22.0" fitWidth="20.0">
                       <image>
-                          <Image url="@../images/add.png" />
+                          <Image url="@../../images/add.png" />
                       </image>
                   </ImageView>
               </graphic>
@@ -45,17 +45,17 @@
    <ListView fx:id="listHebergement" layoutY="337.0" prefHeight="413.0" prefWidth="1000.0" />
    <ImageView fitHeight="221.0" fitWidth="332.0" layoutX="641.0" layoutY="87.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@../images/image.png" />
+         <Image url="@../../images/image.png" />
       </image>
    </ImageView>
    <ImageView fitHeight="58.0" fitWidth="724.0" layoutX="14.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@../images/titreadmin.png" />
+         <Image url="@../../images/titreadmin.png" />
       </image>
    </ImageView>
    <ImageView fitHeight="99.0" fitWidth="332.0" layoutX="668.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@../images/border.png" />
+         <Image url="@../../images/border.png" />
       </image>
    </ImageView>
 </AnchorPane>

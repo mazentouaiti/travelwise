@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" stylesheets="@../style/hotelagence.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotels.controllers.HotelAgence">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" stylesheets="@../../Styles/hotelagence.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Agence.HotelAgence">
     <Label layoutY="-1.0" styleClass="title_pane" text="Accomodation">
         <font>
           <Font size="24.0" />
@@ -22,7 +22,7 @@
         <graphic>
             <ImageView fitHeight="22.0" fitWidth="20.0">
                 <image>
-                    <Image url="@../images/add.png" />
+                    <Image url="@../../images/add.png" />
                 </image>
             </ImageView>
         </graphic>
@@ -63,7 +63,7 @@
    </AnchorPane>
    <ImageView fitHeight="120.0" fitWidth="125.0" layoutX="850.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@../images/hebergementicon.png" />
+         <Image url="@../../images/hebergementicon.png" />
       </image>
    </ImageView>
    <Button layoutX="68.0" layoutY="302.0" mnemonicParsing="false" onAction="#onReset" prefHeight="29.0" prefWidth="36.0">

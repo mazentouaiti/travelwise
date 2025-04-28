@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane prefHeight="65.0" prefWidth="830.0" styleClass="cell_container" stylesheets="@../style/AccCell.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotels.controllers.AccCellAdmin">
+<AnchorPane prefHeight="65.0" prefWidth="830.0" styleClass="cell_container" stylesheets="@../../Styles/AccCell.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Admin.AccCellAdmin">
     <AnchorPane layoutX="2.0" layoutY="12.0" prefHeight="52.0" prefWidth="802.0" styleClass="container" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
         <FontAwesomeIconView glyphName="HOTEL" layoutX="4.0" layoutY="37.8" size="28" AnchorPane.leftAnchor="4.0" AnchorPane.topAnchor="13.799999999999997" />
         <Label fx:id="name_lbl" layoutX="63.0" layoutY="18.4" styleClass="price_lbl" text="Name" AnchorPane.topAnchor="18.4" />

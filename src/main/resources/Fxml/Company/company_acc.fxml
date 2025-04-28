@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" stylesheets="@../style/clientacc.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotels.controllers.CompanyAcc">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" stylesheets="@../../Styles/clientacc.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Company.CompanyAcc">
    <children>
       <ScrollPane fx:id="scrollPane" layoutY="249.0" prefHeight="530.0" prefWidth="850.0">
          <content>
@@ -22,17 +22,17 @@
       <FontAwesomeIconView glyphName="MONEY" layoutX="373.0" layoutY="214.0" size="16" />
       <ImageView fitHeight="148.0" fitWidth="308.0" layoutX="542.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/zina1.png" />
+            <Image url="@../../images/zina1.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="140.0" fitWidth="308.0" layoutX="-4.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/zina3.png" />
+            <Image url="@../../images/zina3.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="131.0" fitWidth="602.0" layoutX="127.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/titre.png" />
+            <Image url="@../../images/titre.png" />
          </image>
       </ImageView>
    </children>

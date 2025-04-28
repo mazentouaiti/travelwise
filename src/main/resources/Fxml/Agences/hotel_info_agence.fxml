@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1000.0" styleClass="flights_view" stylesheets="@../style/hotelinfo.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotels.controllers.HotelInfo">
+<AnchorPane prefHeight="750.0" prefWidth="1000.0" styleClass="flights_view" stylesheets="@../../Styles/hotelinfo.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Agence.HotelInfo">
    <children>
       <ImageView fx:id="photoinfo" fitHeight="257.0" fitWidth="398.0" layoutX="56.0" layoutY="97.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/hebergementicon.png" />
+            <Image url="@../../images/hebergementicon.png" />
          </image>
       </ImageView>
       <Label layoutX="68.0" layoutY="398.0" text="Description :">
@@ -37,12 +37,12 @@
          </content>
 
             </ScrollPane>
-      <Button fx:id="returnButton" layoutX="933.0" layoutY="696.0" mnemonicParsing="false" onAction="#retournerAccueil" prefHeight="27.0" prefWidth="41.0" styleClass="Button" stylesheets="@../style/hotel_add.css">
+      <Button fx:id="returnButton" layoutX="933.0" layoutY="696.0" mnemonicParsing="false" onAction="#retournerAccueil" prefHeight="27.0" prefWidth="41.0" styleClass="Button" stylesheets="@../../Styles/hotel_add.css">
          <graphic>
             <FontAwesomeIconView glyphName="CHEVRON_LEFT" size="18" />
          </graphic>
       </Button>
-      <AnchorPane id="anchop" layoutX="361.0" layoutY="64.0" prefHeight="322.0" prefWidth="572.0" stylesheets="@../style/hotel_add.css">
+      <AnchorPane id="anchop" layoutX="361.0" layoutY="64.0" prefHeight="322.0" prefWidth="572.0" stylesheets="@../../Styles/hotel_add.css">
          <children>
             <Label layoutX="19.0" layoutY="27.0" text="Name :">
                <font>

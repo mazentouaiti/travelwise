@@ -6,6 +6,7 @@ import com.example.travelwise.services.ServiceHebergement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -20,15 +21,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-
-
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class ClientAcc {
+public class ClientAcc implements Initializable {
 
     @FXML
     private ScrollPane scrollPane;
@@ -46,9 +47,10 @@ public class ClientAcc {
     private List<Hebergement> displayedHotels = new ArrayList<>(); // liste filtrée
 
     // Appelé automatiquement après le chargement du FXML
-    @FXML
-    public void initialize() {
-          // Marge autour du FlowPane
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        // Marge autour du FlowPane
         scrollPane.setBackground(null);
         flowPane.setBackground(null);
 
@@ -65,8 +67,29 @@ public class ClientAcc {
         displayedHotels = new ArrayList<>(hotelList);
         updateHotelCards(displayedHotels);
 
-
     }
+
+//    @FXML
+//    public void initialize() {
+//          // Marge autour du FlowPane
+//        scrollPane.setBackground(null);
+//        flowPane.setBackground(null);
+//
+//        flowPane.setHgap(20);
+//        flowPane.setVgap(20);
+//        flowPane.setPadding(new Insets(20));
+//
+//        pricecombo.getItems().addAll("Ascending Price", "Descending Price", "Rating");
+//        pricecombo.setOnAction(event -> sortHotels());
+//        destinationfiled.textProperty().addListener((observable, oldValue, newValue) -> filterHotels());
+//
+//        // CHARGER UNIQUEMENT ICI la liste, PAS avec loadHebergements()
+//        hotelList = service.afficher();
+//        displayedHotels = new ArrayList<>(hotelList);
+//        updateHotelCards(displayedHotels);
+//
+//
+//    }
     private void filterHotels() {
         String keyword = destinationfiled.getText().toLowerCase();
         displayedHotels = hotelList.stream()

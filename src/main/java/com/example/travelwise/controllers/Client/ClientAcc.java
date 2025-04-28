@@ -187,8 +187,8 @@ public class ClientAcc implements Initializable {
         }
 
         // Charger les deux images
-        Image imgHeartEmpty = new Image(getClass().getResource("/com/example/hotels/images/heart_empty.png").toExternalForm());
-        Image imgHeartFull = new Image(getClass().getResource("/com/example/hotels/images/heart_full.png").toExternalForm());
+        Image imgHeartEmpty = new Image(getClass().getResource("../../resources/images/heart_empty.png").toExternalForm());
+        Image imgHeartFull = new Image(getClass().getResource("../../resources/images/heart_full.png").toExternalForm());
 
 
 // Créer un ImageView pour afficher l'image actuelle
@@ -267,7 +267,7 @@ public class ClientAcc implements Initializable {
     private void openHotelInfo(Hebergement hebergement) {
         try {
             // Charger le fichier FXML de la scène hotel_info
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hotels/fxml/hotel_info_client.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/Fxml/hotel_info_client.fxml"));
             Parent root = loader.load();
 
             // Récupérer le contrôleur de hotel_info
@@ -293,7 +293,7 @@ public class ClientAcc implements Initializable {
     private void openReservation(Hebergement hebergement, ActionEvent event) {
         try {
             // Charger le fichier FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/Client/fxml/reservationclient.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../../resources/Fxml/reservationclient.fxml"));
             Parent root = loader.load();
 
             // Récupérer le stage de la scène actuelle

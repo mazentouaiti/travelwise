@@ -1,6 +1,6 @@
 package com.example.travelwise.controllers.Client;
 
-import com.example.hotels.models.Hebergement;
+import com.example.travelwise.models.Hebergement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -101,7 +101,7 @@ public class ReservationClient {
     private void handleCancelAction(ActionEvent event) {
         try {
             // Charger le fichier FXML de ClientAcc
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hotels/fxml/client_acc.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Client/client_acc.fxml"));
             Parent root = loader.load();
 
             // Récupérer le stage de la scène actuelle

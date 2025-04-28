@@ -1,7 +1,8 @@
 package com.example.travelwise.controllers.Client;
 
-import com.example.hotels.models.Hebergement;
-import com.example.hotels.services.ServiceHebergement;
+import com.example.travelwise.controllers.Company.HotelInfoClient;
+import com.example.travelwise.models.Hebergement;
+import com.example.travelwise.services.ServiceHebergement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -269,7 +270,7 @@ public class ClientAcc {
     private void openReservation(Hebergement hebergement, ActionEvent event) {
         try {
             // Charger le fichier FXML
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/hotels/fxml/reservationclient.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/Client/fxml/reservationclient.fxml"));
             Parent root = loader.load();
 
             // Récupérer le stage de la scène actuelle

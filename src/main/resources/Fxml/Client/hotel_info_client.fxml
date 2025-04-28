@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="flights_view" stylesheets="@../style/hotelinfo.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.hotels.controllers.HotelInfoClient">
+<AnchorPane prefHeight="750.0" prefWidth="850.0" styleClass="flights_view" stylesheets="@../style/hotelinfo.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Client.">
    <children>
       <ImageView fx:id="photoinfo" fitHeight="223.0" fitWidth="233.0" layoutX="14.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
          <image>

@@ -1,7 +1,8 @@
 package com.example.travelwise.controllers.Client;
 
-import com.example.hotels.models.Hebergement;
-import com.example.hotels.services.ServiceHebergement;
+import com.example.travelwise.controllers.Company.HotelInfoClient;
+import com.example.travelwise.models.Hebergement;
+import com.example.travelwise.services.ServiceHebergement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

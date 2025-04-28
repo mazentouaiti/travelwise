@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.FlowPane?>
 
-<AnchorPane prefHeight="750.0" prefWidth="850.0" stylesheets="@../../Styles/clientacc.css"
+<AnchorPane prefHeight="750.0" prefWidth="850.0" stylesheets="@../../Styles/accommodation.css"
             xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.example.travelwise.controllers.Client.ClientAcc">
    <ScrollPane fx:id="scrollPane" layoutY="259.0" prefHeight="520.0" prefWidth="850.0">

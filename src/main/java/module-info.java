@@ -7,8 +7,7 @@ module com.example.travelwise {
     requires jdk.jsobject;
     requires javafx.web;
     requires org.json;
-    requires com.sun.jna.platform;
-    requires com.sun.jna;
+
 
     opens com.example.travelwise to javafx.fxml;
     opens com.example.travelwise.controllers to javafx.fxml;

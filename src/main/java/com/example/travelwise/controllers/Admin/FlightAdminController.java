@@ -2,20 +2,19 @@ package com.example.travelwise.controllers.Admin;
 
 import com.example.travelwise.Services.FlightServices;
 import com.example.travelwise.models.FlightModel;
+import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.util.Callback;
-
+import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -24,14 +23,41 @@ public class FlightAdminController implements Initializable {
 
 
     @FXML private ListView<FlightModel> listview_flights;
-
+    private boolean isToolbarVisible = false;
     private final FlightServices flightService = new FlightServices();
+    @FXML
+    private Button reject_all;
+    @FXML
+    private Button accept_all;
+    @FXML
+    private Button reset_btn;
+    @FXML
+    private Button toggleToolbarBtn;
+    @FXML
+    private VBox actionToolbar;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        actionToolbar.setTranslateX(150);
         setupListView();
         loadFlights();
     }
+    @FXML
+    private void toggleToolbar(ActionEvent actionEvent) {
+        TranslateTransition slide = new TranslateTransition(Duration.millis(300), actionToolbar);
+
+        if (isToolbarVisible) {
+            // Hide toolbar (move right)
+            slide.setToX(150);
+        } else {
+            // Show toolbar (move left)
+            slide.setToX(0);
+        }
+
+        slide.play();
+        isToolbarVisible = !isToolbarVisible;
+    }
+
 
     private void setupListView() {
         listview_flights.setCellFactory(param -> new ListCell<FlightModel>() {
@@ -73,7 +99,49 @@ public class FlightAdminController implements Initializable {
         ObservableList<FlightModel> observableList = FXCollections.observableArrayList(flightList);
         listview_flights.setItems(observableList);
     }
+    @FXML
+    private void onAcceptAllClicked() {
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirm Approval");
+        confirmation.setHeaderText("Approve all pending flights");
+        confirmation.setContentText("Are you sure you want to approve all pending flights?");
 
+        Optional<ButtonType> result = confirmation.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            flightService.approveAllPendingFlights();
+            showAlert("Success", "All pending flights have been approved.");
+            loadFlights(); // Refresh the list
+        }
+    }
+
+    @FXML
+    private void onRejectAllClicked() {
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirm Rejection");
+        confirmation.setHeaderText("Reject all pending flights");
+        confirmation.setContentText("Are you sure you want to reject all pending flights?");
+
+        Optional<ButtonType> result = confirmation.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            flightService.rejectAllPendingFlights();
+            showAlert("Success", "All pending flights have been rejected.");
+            loadFlights(); // Refresh the list
+        }
+    }
+    @FXML
+    private void onResetAllClicked() {
+        Alert confirmation = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirm Reset All");
+        confirmation.setHeaderText("Reset all flight statuses");
+        confirmation.setContentText("Are you sure you want to reset ALL approved/rejected flights back to pending?");
+
+        Optional<ButtonType> result = confirmation.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            flightService.resetAllFlightStatuses();
+            showAlert("Success", "All flight statuses have been reset to pending.");
+            loadFlights(); // Refresh the list
+        }
+    }
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -82,4 +150,5 @@ public class FlightAdminController implements Initializable {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 }

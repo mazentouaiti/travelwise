@@ -186,6 +186,43 @@ public class FlightServices implements Services{
             System.out.println("Error rejecting flight: " + e.getMessage());
         }
     }
+    public void approveAllPendingFlights() {
+        String sql = "UPDATE flights SET admin_status = 'approved' WHERE admin_status = 'pending' OR admin_status IS NULL";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            int updatedRows = ps.executeUpdate();
+            System.out.println("Approved " + updatedRows + " pending flights");
+        } catch (SQLException e) {
+            System.out.println("Error approving all pending flights: " + e.getMessage());
+        }
+    }
+
+    public void rejectAllPendingFlights() {
+        String sql = "UPDATE flights SET admin_status = 'rejected' WHERE admin_status = 'pending' OR admin_status IS NULL";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            int updatedRows = ps.executeUpdate();
+            System.out.println("Rejected " + updatedRows + " pending flights");
+        } catch (SQLException e) {
+            System.out.println("Error rejecting all pending flights: " + e.getMessage());
+        }
+    }
+    public void resetAllFlightStatuses() {
+        String sql = "UPDATE flights SET admin_status = 'pending' WHERE admin_status IN ('approved', 'rejected')";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            int updatedRows = ps.executeUpdate();
+            System.out.println("Reset " + updatedRows + " flights to pending status");
+        } catch (SQLException e) {
+            System.out.println("Error resetting all flight statuses: " + e.getMessage());
+        }
+    }
+    public void resetFlightStatus(int flightId) {
+        String sql = "UPDATE flights SET admin_status = 'pending' WHERE flight_id = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, flightId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error resetting flight status: " + e.getMessage());
+        }
+    }
     public void updateAllFlightStatuses() {
         String selectSql = "SELECT * FROM flights";
         String updateSql = "UPDATE flights SET status = ? WHERE flight_id = ?";

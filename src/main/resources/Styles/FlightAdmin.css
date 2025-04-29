@@ -40,3 +40,58 @@
     -fx-pref-width: 0;
     -fx-background-radius: 8;
 }
+/* Toggle Button */
+.toggle-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: #4CAF50;
+    -fx-border-width: 2;
+    -fx-border-radius: 5;
+    -fx-padding: 5;
+    -fx-cursor: hand;
+}
+
+.toggle-btn:hover {
+    -fx-background-color: #f0f0f0;
+}
+
+/* Toolbar */
+.toolbar {
+    -fx-background-color: white;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-radius: 5;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
+}
+
+/* Toolbar Buttons */
+.toolbar-btn {
+    -fx-min-width: 120;
+    -fx-background-color: white;
+    -fx-border-color: #4CAF50;
+    -fx-border-width: 1;
+    -fx-border-radius: 3;
+    -fx-background-radius: 3;
+    -fx-padding: 5 10;
+    -fx-font-size: 12px;
+    -fx-cursor: hand;
+}
+
+.toolbar-btn:hover {
+    -fx-background-color: #f0f0f0;
+}
+
+.toolbar-btn:armed {
+    -fx-background-color: #e0e0e0;
+}
+.font-awesome-icon {
+    -fx-fill: #4CAF50;
+}
+
+/* Make sure the toolbar buttons are properly sized */
+.toolbar Button {
+    -fx-min-width: 120;
+    -fx-min-height: 32;
+    -fx-alignment: center;
+}

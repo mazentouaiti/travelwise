@@ -5,6 +5,7 @@ import com.example.travelwise.controllers.Agence.AgencyController;
 import com.example.travelwise.controllers.Client.ClientController;
 import com.example.travelwise.controllers.Client.WindowReservationController;
 import com.example.travelwise.controllers.Company.CompanyFlightsController;
+import com.example.travelwise.controllers.ChatbotController;
 import com.example.travelwise.models.FlightModel;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -22,7 +23,7 @@ public class ViewFactory {
     private AnchorPane flightView;
     private AnchorPane profileView;
     private AnchorPane hotelsView;
-    //private AnchorPane signupView;
+    private AnchorPane chatbotView;
 
     //AdminViews
     private final ObjectProperty<AdminMenuOptions> adminSelectedMenuItem;
@@ -181,9 +182,23 @@ public class ViewFactory {
         loader.setController(companyFlightsController);
         createStage(loader);
     }
-
-
-
+    // ************************************************************************************************************
+    public AnchorPane getChatbotView() {
+        if (chatbotView == null) {
+            try {
+                chatbotView = new FXMLLoader(getClass().getResource("/Fxml/chatbot.fxml")).load();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return chatbotView;
+    }
+    public void showChatbotWindow() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml//chatbot.fxml"));
+        ChatbotController chatbotController = new ChatbotController();
+        loader.setController(chatbotController);
+        createStage(loader);
+    }
 
     // ************************************************************************************************************
     private void createStage(FXMLLoader loader) {

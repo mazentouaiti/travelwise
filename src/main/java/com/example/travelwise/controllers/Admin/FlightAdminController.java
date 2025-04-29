@@ -2,6 +2,8 @@ package com.example.travelwise.controllers.Admin;
 
 import com.example.travelwise.Services.FlightServices;
 import com.example.travelwise.models.FlightModel;
+import javafx.animation.ParallelTransition;
+import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,7 +13,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Line;
 import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
@@ -41,20 +45,37 @@ public class FlightAdminController implements Initializable {
         actionToolbar.setTranslateX(150);
         setupListView();
         loadFlights();
+
+        // Make sure toggle button is in correct initial state
+        Line middleLine = (Line)((StackPane)toggleToolbarBtn.getGraphic()).getChildren().get(1);
+        middleLine.setRotate(0);
     }
     @FXML
     private void toggleToolbar(ActionEvent actionEvent) {
         TranslateTransition slide = new TranslateTransition(Duration.millis(300), actionToolbar);
 
         if (isToolbarVisible) {
-            // Hide toolbar (move right)
-            slide.setToX(150);
+            // Hide toolbar (slide out to right)
+            slide.setToX(150); // Matches toolbar width
         } else {
-            // Show toolbar (move left)
+            // Show toolbar (slide in from right)
             slide.setToX(0);
         }
 
-        slide.play();
+        // Create parallel animation for the hamburger icon
+        RotateTransition rotate = new RotateTransition(Duration.millis(300),
+                ((StackPane)toggleToolbarBtn.getGraphic()).getChildren().get(1));
+
+        if (isToolbarVisible) {
+            rotate.setFromAngle(45);
+            rotate.setToAngle(0);
+        } else {
+            rotate.setFromAngle(0);
+            rotate.setToAngle(45);
+        }
+
+        // Play both animations together
+        new ParallelTransition(slide, rotate).play();
         isToolbarVisible = !isToolbarVisible;
     }
 

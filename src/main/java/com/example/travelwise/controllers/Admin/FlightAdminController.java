@@ -1,10 +1,7 @@
 package com.example.travelwise.controllers.Admin;
-
+import javafx.animation.*;
 import com.example.travelwise.Services.FlightServices;
 import com.example.travelwise.models.FlightModel;
-import javafx.animation.ParallelTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.TranslateTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,9 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Line;
 import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
@@ -38,45 +32,93 @@ public class FlightAdminController implements Initializable {
     @FXML
     private Button toggleToolbarBtn;
     @FXML
-    private VBox actionToolbar;
+    private AnchorPane actionToolbar;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        actionToolbar.setTranslateX(150);
+        actionToolbar.setTranslateX(actionToolbar.getWidth());
+        // Initialize buttons as invisible and disabled
+        accept_all.setOpacity(0);
+        reject_all.setOpacity(0);
+        reset_btn.setOpacity(0);
+        accept_all.setDisable(true);
+        reject_all.setDisable(true);
+        reset_btn.setDisable(true);
         setupListView();
         loadFlights();
-
-        // Make sure toggle button is in correct initial state
-        Line middleLine = (Line)((StackPane)toggleToolbarBtn.getGraphic()).getChildren().get(1);
-        middleLine.setRotate(0);
     }
     @FXML
     private void toggleToolbar(ActionEvent actionEvent) {
+        if (isToolbarVisible) {
+            hideToolbar();
+        } else {
+            showToolbar();
+        }
+        isToolbarVisible = !isToolbarVisible;
+    }
+
+    private void showToolbar() {
+        // Slide in the toolbar
         TranslateTransition slide = new TranslateTransition(Duration.millis(300), actionToolbar);
+        slide.setToX(0);
 
-        if (isToolbarVisible) {
-            // Hide toolbar (slide out to right)
-            slide.setToX(150); // Matches toolbar width
-        } else {
-            // Show toolbar (slide in from right)
-            slide.setToX(0);
-        }
+        // Reset opacity for animation (buttons start invisible)
+        accept_all.setOpacity(0);
+        reject_all.setOpacity(0);
+        reset_btn.setOpacity(0);
 
-        // Create parallel animation for the hamburger icon
-        RotateTransition rotate = new RotateTransition(Duration.millis(300),
-                ((StackPane)toggleToolbarBtn.getGraphic()).getChildren().get(1));
+        // Enable buttons for interaction
+        accept_all.setDisable(false);
+        reject_all.setDisable(false);
+        reset_btn.setDisable(false);
 
-        if (isToolbarVisible) {
-            rotate.setFromAngle(45);
-            rotate.setToAngle(0);
-        } else {
-            rotate.setFromAngle(0);
-            rotate.setToAngle(45);
-        }
+        // Create sequential animations
+        SequentialTransition buttonSequence = new SequentialTransition(
+                new PauseTransition(Duration.millis(100)),
+                createFadeAnimation(accept_all),
+                new PauseTransition(Duration.millis(100)),
+                createFadeAnimation(reject_all),
+                new PauseTransition(Duration.millis(100)),
+                createFadeAnimation(reset_btn)
+        );
 
         // Play both animations together
-        new ParallelTransition(slide, rotate).play();
-        isToolbarVisible = !isToolbarVisible;
+        new ParallelTransition(slide, buttonSequence).play();
+    }
+
+    private FadeTransition createFadeAnimation(Button button) {
+        FadeTransition fade = new FadeTransition(Duration.millis(200), button);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        return fade;
+    }
+
+    private void hideToolbar() {
+        // Slide out the toolbar
+        TranslateTransition slide = new TranslateTransition(Duration.millis(300), actionToolbar);
+        slide.setToX(actionToolbar.getWidth());
+
+        // Fade out all buttons simultaneously
+        ParallelTransition fadeOut = new ParallelTransition(
+                createFadeOutAnimation(accept_all),
+                createFadeOutAnimation(reject_all),
+                createFadeOutAnimation(reset_btn)
+        );
+
+        // Disable buttons during hide
+        fadeOut.setOnFinished(e -> {
+            accept_all.setDisable(true);
+            reject_all.setDisable(true);
+            reset_btn.setDisable(true);
+        });
+
+        new ParallelTransition(slide, fadeOut).play();
+    }
+
+    private FadeTransition createFadeOutAnimation(Button button) {
+        FadeTransition fade = new FadeTransition(Duration.millis(150), button);
+        fade.setToValue(0);
+        return fade;
     }
 
 

@@ -8,7 +8,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 
 <AnchorPane prefHeight="750.0" prefWidth="1000.0" styleClass="flight_view" stylesheets="@../../Styles/FlightAdmin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Admin.FlightAdminController">
@@ -26,17 +25,21 @@
          <StackPane>
             <Line endX="20" startX="0" stroke="#4CAF50" strokeWidth="2" />
             <Line endX="20" endY="6" startX="0" startY="6" stroke="#4CAF50" strokeWidth="2" />
-            <Line endX="20" endY="12" startX="0" startY="12" stroke="#4CAF50" strokeWidth="2" />
+            <Line endX="20" endY="12" startX="0" startY="12" stroke="#588b8b" strokeWidth="2" />
          </StackPane>
       </graphic>
    </Button>
-   <VBox fx:id="actionToolbar" spacing="10" styleClass="toolbar" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="10">
-      <Button fx:id="accept_all" onAction="#onAcceptAllClicked" styleClass="toolbar-btn" text="Accept ALL" />
-      <Button fx:id="reject_all" onAction="#onRejectAllClicked" styleClass="toolbar-btn" text="Reject ALL" />
-      <Button fx:id="reset_btn" onAction="#onResetAllClicked" styleClass="toolbar-btn">
+   <AnchorPane fx:id="actionToolbar" styleClass="toolbar" prefWidth="150"
+               AnchorPane.rightAnchor="0" AnchorPane.topAnchor="10">
+      <Button fx:id="accept_all" layoutX="10" layoutY="10" text="Accept ALL"
+              styleClass="toolbar-btn" onAction="#onAcceptAllClicked"/>
+      <Button fx:id="reject_all" layoutX="10" layoutY="50" text="Reject ALL"
+              styleClass="toolbar-btn" onAction="#onRejectAllClicked"/>
+      <Button fx:id="reset_btn" layoutX="10" layoutY="90" styleClass="toolbar-btn"
+              onAction="#onResetAllClicked">
          <graphic>
-            <FontAwesomeIconView glyphName="UNDO" size="16" />
+            <FontAwesomeIconView glyphName="UNDO" size="16"/>
          </graphic>
       </Button>
-   </VBox>
+   </AnchorPane>
 </AnchorPane>

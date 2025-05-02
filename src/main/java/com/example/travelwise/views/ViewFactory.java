@@ -4,7 +4,6 @@ import com.example.travelwise.controllers.Admin.AdminController;
 import com.example.travelwise.controllers.Agence.AgencyController;
 import com.example.travelwise.controllers.Client.ClientController;
 import com.example.travelwise.controllers.Client.WindowReservationController;
-import com.example.travelwise.controllers.Company.CompanyFlightsController;
 import com.example.travelwise.controllers.ChatbotController;
 import com.example.travelwise.models.FlightModel;
 import javafx.beans.property.ObjectProperty;
@@ -31,16 +30,14 @@ public class ViewFactory {
     //AgencyViews
     private final ObjectProperty<AgencyMenuOptions> agencySelectedMenuItem;
     private AnchorPane agencyFlightsView;
-    //company
-    private final ObjectProperty<CompanyMenuOptions> companySelectedMenuItem;
-    private AnchorPane CompanyFlightsView;
+
     //viewFactory
     public ViewFactory() {
         this.loginAccountType = AccountType.PASSENGER;
         this.adminSelectedMenuItem = new SimpleObjectProperty<>();
         this.clientSelectedMenuItem = new SimpleObjectProperty<>();
         this.agencySelectedMenuItem = new SimpleObjectProperty<>();
-        this.companySelectedMenuItem = new SimpleObjectProperty<>();
+
     }
 
     public AccountType getLoginAccountType() {
@@ -163,25 +160,7 @@ public class ViewFactory {
         createStage(loader);
     }
 
-    // ************************************************************************************************************
-    public ObjectProperty<CompanyMenuOptions> getCompanySelectedMenuItem() {return companySelectedMenuItem;}
-    public AnchorPane getCompanyFlightsView(){
-        if (CompanyFlightsView == null) {
-            try {
-                CompanyFlightsView = new FXMLLoader(getClass().getResource("/Fxml/Company/CompanyFlights.fxml")).load();
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-        return CompanyFlightsView;
-    }
-    //Company window
-    public void showCompanyWindow(){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Company/Company.fxml"));
-        CompanyFlightsController companyFlightsController = new CompanyFlightsController();
-        loader.setController(companyFlightsController);
-        createStage(loader);
-    }
+
     // ************************************************************************************************************
     public AnchorPane getChatbotView() {
         if (chatbotView == null) {

@@ -22,7 +22,7 @@ public class LoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        acc_selector.setItems(FXCollections.observableArrayList(AccountType.PASSENGER, AccountType.AGENCY, AccountType.COMPANY, AccountType.ADMIN));
+        acc_selector.setItems(FXCollections.observableArrayList(AccountType.PASSENGER, AccountType.AGENCY,  AccountType.ADMIN));
         acc_selector.setValue(Model.getInstance().getViewFactory().getLoginAccountType());
         acc_selector.valueProperty().addListener(observable->Model.getInstance().getViewFactory().setLoginAccountType(acc_selector.getValue()));
         login_btn.setOnAction(event -> onLogin());
@@ -37,8 +37,6 @@ public class LoginController implements Initializable {
             Model.getInstance().getViewFactory().showAdminWindow();
         }else if (Model.getInstance().getViewFactory().getLoginAccountType()==AccountType.AGENCY) {
             Model.getInstance().getViewFactory().showAgencyWindow();
-        } else if (Model.getInstance().getViewFactory().getLoginAccountType()==AccountType.COMPANY) {
-            Model.getInstance().getViewFactory().showCompanyWindow();
         }
     }
     private void onSignup() {

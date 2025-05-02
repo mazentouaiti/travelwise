@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 public class FlightAdminController implements Initializable {
 
 
-    @FXML private ListView<FlightModel> listview_flights;
+    @FXML private ListView<FlightModel> pendingListView;
     private boolean isToolbarVisible = false;
     private final FlightServices flightService = new FlightServices();
     @FXML
@@ -33,6 +33,10 @@ public class FlightAdminController implements Initializable {
     private Button toggleToolbarBtn;
     @FXML
     private AnchorPane actionToolbar;
+    @FXML
+    private ListView<FlightModel> approvedListView;
+    @FXML
+    private ListView<FlightModel> rejectedListView;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -123,7 +127,12 @@ public class FlightAdminController implements Initializable {
 
 
     private void setupListView() {
-        listview_flights.setCellFactory(param -> new ListCell<FlightModel>() {
+        pendingListView.setCellFactory(param -> createFlightCell());
+        approvedListView.setCellFactory(param -> createFlightCell());
+        rejectedListView.setCellFactory(param -> createFlightCell());
+    }
+    private ListCell<FlightModel> createFlightCell() {
+        return new ListCell<FlightModel>() {
             private FXMLLoader loader;
             private AnchorPane cell;
             private FlightAdminCellController controller;
@@ -151,16 +160,32 @@ public class FlightAdminController implements Initializable {
                     setGraphic(cell);
                 }
             }
-        });
+        };
     }
 
 
 
     @FXML
     public void loadFlights() {
-        List<FlightModel> flightList = flightService.getAllFlights();
-        ObservableList<FlightModel> observableList = FXCollections.observableArrayList(flightList);
-        listview_flights.setItems(observableList);
+        List<FlightModel> allFlights = flightService.getAllFlights();
+
+        ObservableList<FlightModel> pendingFlights = FXCollections.observableArrayList();
+        ObservableList<FlightModel> approvedFlights = FXCollections.observableArrayList();
+        ObservableList<FlightModel> rejectedFlights = FXCollections.observableArrayList();
+
+        for (FlightModel flight : allFlights) {
+            if (flight.getAdminStatus() == null || "pending".equals(flight.getAdminStatus())) {
+                pendingFlights.add(flight);
+            } else if ("approved".equals(flight.getAdminStatus())) {
+                approvedFlights.add(flight);
+            } else if ("rejected".equals(flight.getAdminStatus())) {
+                rejectedFlights.add(flight);
+            }
+        }
+
+        pendingListView.setItems(pendingFlights);
+        approvedListView.setItems(approvedFlights);
+        rejectedListView.setItems(rejectedFlights);
     }
     @FXML
     private void onAcceptAllClicked() {

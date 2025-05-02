@@ -57,6 +57,7 @@ public class FlightAdminCellController implements Initializable {
                 refuse_btn.setVisible(true);
             }
 
+
             if (flight.getDepartureDate() != null) {
                 depart_lbl.setText(dateFormat.format(flight.getDepartureDate()));
             }

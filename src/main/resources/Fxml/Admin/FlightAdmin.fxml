@@ -9,12 +9,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="750.0" prefWidth="1000.0" styleClass="flight_view" stylesheets="@../../Styles/FlightAdmin.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.travelwise.controllers.Admin.FlightAdminController">
    <AnchorPane layoutX="277.0" layoutY="65.0" prefHeight="151.0" prefWidth="556.0" styleClass="top_view" AnchorPane.topAnchor="65.0">
       <Label layoutX="284.0" layoutY="62.0" text="Welcome To Space ADMIN" />
    </AnchorPane>
-   <ListView fx:id="listview_flights" layoutX="267.0" layoutY="208.0" prefHeight="500.0" prefWidth="1000.0" styleClass="listView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+   <ListView fx:id="pendingListView" layoutX="267.0" layoutY="208.0" prefHeight="500.0" prefWidth="470.0" styleClass="listView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
    <ImageView fitHeight="381.0" fitWidth="531.0" layoutX="-22.0" layoutY="-29.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@../../images/planeAdmin.png" />
@@ -29,17 +31,25 @@
          </StackPane>
       </graphic>
    </Button>
-   <AnchorPane fx:id="actionToolbar" styleClass="toolbar" prefWidth="150"
-               AnchorPane.rightAnchor="0" AnchorPane.topAnchor="10">
-      <Button fx:id="accept_all" layoutX="10" layoutY="10" text="Accept ALL"
-              styleClass="toolbar-btn" onAction="#onAcceptAllClicked"/>
-      <Button fx:id="reject_all" layoutX="10" layoutY="50" text="Reject ALL"
-              styleClass="toolbar-btn" onAction="#onRejectAllClicked"/>
-      <Button fx:id="reset_btn" layoutX="10" layoutY="90" styleClass="toolbar-btn"
-              onAction="#onResetAllClicked">
+   <AnchorPane fx:id="actionToolbar" prefWidth="150" styleClass="toolbar" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="10">
+      <Button fx:id="accept_all" layoutX="10" layoutY="10" onAction="#onAcceptAllClicked" styleClass="toolbar-btn" text="Accept ALL" />
+      <Button fx:id="reject_all" layoutX="10" layoutY="50" onAction="#onRejectAllClicked" styleClass="toolbar-btn" text="Reject ALL" />
+      <Button fx:id="reset_btn" layoutX="10" layoutY="90" onAction="#onResetAllClicked" styleClass="toolbar-btn">
          <graphic>
-            <FontAwesomeIconView glyphName="UNDO" size="16"/>
+            <FontAwesomeIconView glyphName="UNDO" size="16" />
          </graphic>
       </Button>
    </AnchorPane>
+   <ListView fx:id="approvedListView" layoutX="503.0" layoutY="275.0" prefHeight="200.0" prefWidth="470.0" styleClass="listView" />
+   <ListView fx:id="rejectedListView" layoutX="509.0" layoutY="517.0" prefHeight="200.0" prefWidth="470.0" styleClass="listView" />
+   <Text layoutX="509.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Approved Flights">
+      <font>
+         <Font name="Segoe Print" size="20.0" />
+      </font>
+   </Text>
+   <Text layoutX="503.0" layoutY="507.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rejected Flights">
+      <font>
+         <Font name="Segoe Print" size="20.0" />
+      </font>
+   </Text>
 </AnchorPane>
